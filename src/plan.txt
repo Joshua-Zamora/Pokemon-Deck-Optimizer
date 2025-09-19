@@ -1,0 +1,56 @@
+Card Attacks:
+    Activations:
+        - If you played a Supporter card from your hand during this turn
+        - If you played an Ancient Supporter card from your hand during this turn
+        - If you played a Future Supporter card from your hand during this turn
+        - If 1 of your Pokémon used Angelite during your last turn, this attack can't be used.
+        - If your opponent has no Benched Pokémon, this attack does nothing.
+        - During your opponent's next turn
+        - If tails, discard a card from your hand.
+    Effects:
+        - this attack does 90 more damage
+        - Put a Supporter card from your discard pile into your hand.
+        - Discard the top card of your opponent's deck.
+        - discard 3 more cards in this way. (opponents' deck)
+        - This attack does 20 damage for each Supporter card that has "Team Rocket" in its name in your discard pile.
+        - Choose Item cards or Supporter cards. they can't play any of the chosen cards from their hand.
+        - Choose 1 of your Benched Combee and shuffle that Pokémon and all attached cards into your deck. (If you can't shuffle a Combee into your deck, this attack does nothing.)
+        - Choose 1 of your opponent's Benched Pokémon. Shuffle that Pokémon and all attached cards into their deck, and then shuffle this Pokémon and all attached cards into your deck. (If your opponent has no Benched Pokémon, this attack does nothing).
+        - Choose 3 of your opponent's Benched Pokémon. If you do, shuffle all of your opponent's Benched Pokémon that you didn't choose, and all cards attached to those Pokémon, into their deck.
+        - You may shuffle 3 Energy attached to this Pokémon into your deck. If you do, this attack also does 120 damage to 1 of your opponent's Benched Pokémon.
+        - (Don't apply Weakness and Resistance for Benched Pokémon.)
+        - You may shuffle this Pokémon and all attached cards into your deck.
+        - Search your deck for a Basic Energy card and attach it to this Pokémon.
+        - Then, shuffle your deck.
+        - Search your deck for up to 2 Basic {W} Energy cards and attach them to 1 of your Basic Pokémon.
+        - For each of your Benched Houndour, search your deck for a Basic {D} Energy card and attach it to that Houndour.
+        - Search your deck for up to 2 Basic Energy cards and attach them to your Benched Pokémon in any way you like
+        - If you attached Energy to a Pokémon in this way, this Pokémon is now Poisoned.
+        - Search your deck for up to 2 Basic {G} Energy cards and up to 2 Basic {L} Energy cards
+        - Search your deck for up to 2 Basic Energy cards and attach them to your Future Pokémon in any way you like
+        - Search your deck for a Basic Pokémon and put it onto your Bench
+        - Search your deck for up to 3 Clefairy and put them onto your Bench
+        - Choose up to 3 of your Benched Pokémon. For each of those Pokémon, search your deck for a Basic {R} Energy card and attach it to that Pokémon.
+        - Choose up to 2 of your Benched Pokémon. For each of those Pokémon, search your deck for a card that evolves from that Pokémon and put it onto that Pokémon to evolve it.
+        - Search your deck for up to 2 Grubbin and put them onto your Bench.
+        - Search your deck for up to 2 in any combination of Maushold and Maushold ex and put them onto your Bench
+        - Search your deck for up to 3 in any combination of {R} Pokémon and Basic {R} Energy cards, reveal them, and put them into your hand.
+        - Search your deck for up to 3 Pokémon of different types
+        - Search your deck for up to 3 Basic Energy cards of different types
+        - Search your deck for up to 3 cards and put them into your hand
+        - Flip a coin.
+        - If heads, search your deck for a card and put it into your hand.
+        - You may switch this Pokémon with 1 of your Benched Pokémon.
+        - Put this Pokémon and all attached cards into your deck.
+        - If you put any Pokémon onto your Bench in this way, move an Energy from this Pokémon to the new Benched Pokémon.
+        - Search your deck for 2 cards, shuffle your deck, then put those cards on top of it in any order.
+        - Put 2 Energy attached to this Pokémon into your hand.
+        - Put this Pokémon and all attached cards into your hand.
+        - Put an Energy attached to your opponent's Active Pokémon into their hand.
+        - Put 1 of your Benched Pokémon and all attached cards into your hand.
+
+Card Abilities:
+    Activations:
+        -
+    Effects:
+        -
