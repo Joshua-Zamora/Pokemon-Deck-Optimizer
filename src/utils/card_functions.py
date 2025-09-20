@@ -122,6 +122,7 @@ def print_card_info(card):
 def get_card_pool_specifics(cards):
     num_abilities = 0
     abilities = {}
+    abilities_by_name = {}
     attacks = {}
     health_points = {}
     damages = {}
@@ -129,16 +130,26 @@ def get_card_pool_specifics(cards):
     num_attacks = 0
     min_retreat_cost = 5
     max_retreat_cost = 0
-
+    count = 0
     for card in cards:
+        if card.category == 'Pokemon' and count < 10:
+            print_card_info(card)
+            count += 1
+        else: exit()
         if card.abilities:
             num_abilities += len(card.abilities)
 
             for ability in card.abilities:
+                if ability.name not in abilities_by_name:
+                    abilities_by_name[ability.name] = 1
+                else:
+                    abilities_by_name[ability.name] += 1
+
                 if ability.effect not in abilities:
                     abilities[ability.effect] = 1
                 else:
                     abilities[ability.effect] += 1
+
         if card.hp:
             if card.hp not in health_points:
                 health_points[card.hp] = [card.hp, card.id, card.name]
@@ -173,6 +184,7 @@ def get_card_pool_specifics(cards):
 
     print(f"Number of abilities: {num_abilities}")
     print(f"Number of unique abilities: {len(abilities)}")
+    print(f"Number of unique abilities by name: {len(abilities_by_name)}")
     print(f"Most common ability: {max(abilities, key=abilities.get)}, {abilities[max(abilities, key=abilities.get)]}")
     print(f"Least common ability: {min(abilities, key=abilities.get)}, {abilities[min(abilities, key=abilities.get)]}")
     print(f"Number of attacks: {num_attacks}")

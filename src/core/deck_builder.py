@@ -2,7 +2,7 @@ import pickle
 import random
 import numpy as np
 from typing import List
-from src.core.card import Card
+from src.core.tcg_card import Card
 from src.core.player import Player
 from src.core.game import Game
 

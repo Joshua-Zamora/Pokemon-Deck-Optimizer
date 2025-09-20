@@ -5,6 +5,8 @@ from player import Player
 class Game:
     winner: Player | None = None
     enter_sudden_death: bool = False
+    all_abilities: dict = {}
+    all_attacks: dict = {}
 
     def __init__(self, player_one: Player, player_two: Player):
         self.player_one = player_one
