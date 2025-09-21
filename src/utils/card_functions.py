@@ -132,23 +132,19 @@ def get_card_pool_specifics(cards):
     max_retreat_cost = 0
     count = 0
     for card in cards:
-        if card.category == 'Pokemon' and count < 10:
-            print_card_info(card)
-            count += 1
-        else: exit()
         if card.abilities:
             num_abilities += len(card.abilities)
 
             for ability in card.abilities:
                 if ability.name not in abilities_by_name:
-                    abilities_by_name[ability.name] = 1
+                    abilities_by_name[ability.name] = [ability.effect]
                 else:
-                    abilities_by_name[ability.name] += 1
+                    abilities_by_name[ability.name] += [ability.effect]
 
                 if ability.effect not in abilities:
-                    abilities[ability.effect] = 1
+                    abilities[ability.effect] = [ability.name]
                 else:
-                    abilities[ability.effect] += 1
+                    abilities[ability.effect] += [ability.name]
 
         if card.hp:
             if card.hp not in health_points:
@@ -183,9 +179,31 @@ def get_card_pool_specifics(cards):
                 max_retreat_cost = int(card.retreat)
 
     print(f"Number of abilities: {num_abilities}")
-    print(f"Number of unique abilities: {len(abilities)}")
-    print(f"Number of unique abilities by name: {len(abilities_by_name)}")
-    print(f"Most common ability: {max(abilities, key=abilities.get)}, {abilities[max(abilities, key=abilities.get)]}")
+    print(f"\nNumber of unique abilities by effect: {len(abilities)}")
+    num_unique_effects = 0
+
+    for ability_effect, names in abilities.items():
+        unique_items = list(set(names))
+
+        if len(unique_items) > 1:
+            print(f"{ability_effect}: {len(unique_items)}, {unique_items}")
+        else:
+            num_unique_effects += 1
+    print(f"Number of ability effects that have one name tied to it: {num_unique_effects}")
+
+    print(f"\nNumber of unique abilities by name: {len(abilities_by_name)}")
+
+    num_unique_names = 0
+    for ability_name, effects in abilities_by_name.items():
+        unique_items = list(set(effects))
+
+        if len(unique_items) > 1:
+            print(f"{ability_name}: {len(unique_items)}, {unique_items}")
+        else:
+            num_unique_names += 1
+    print(f"Number of ability names that have one effect tied to it: {num_unique_names}")
+
+    print(f"\nMost common ability: {max(abilities, key=abilities.get)}, {abilities[max(abilities, key=abilities.get)]}")
     print(f"Least common ability: {min(abilities, key=abilities.get)}, {abilities[min(abilities, key=abilities.get)]}")
     print(f"Number of attacks: {num_attacks}")
     print(f"Number of unique attack effects: {len(attacks)}")
@@ -213,7 +231,7 @@ def get_card_pool_specifics(cards):
     print(f"Stages: {stages}")
     print(f"Minimum retreat cost: {min_retreat_cost}")
     print(f"Maximum retreat cost: {max_retreat_cost}")
-
+    exit()
     # Refined keywords (TCG-specific, synonyms)
     keywords = [
         'discard', 'draw', 'evolve', 'devolve', 'evolved', 'basic', 'stage', 'heal', 'recover', 'attach', 'search',
@@ -297,8 +315,8 @@ if __name__ == "__main__":
     regs = ["G", "H", "I"]
     # all_pokemon_resumes = read_cards(file_name_resumes)
     # flattened = [item for sublist in all_pokemon_resumes for item in sublist]
-
     # all_pokemon_cards = asyncio.run(get_actual_card_data_from_resumes(flattened))
+
     all_legal_pokemon_cards = read_cards(file_name_cards)
     # print_card_info(all_legal_pokemon_cards[0])
     # asyncio.run(save_cards(file_name_cards, all_pokemon_cards))

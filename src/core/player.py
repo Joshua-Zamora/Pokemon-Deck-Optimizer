@@ -50,7 +50,7 @@ class Player:
         for i in range(num_cards):
             self.hand.append(self.deck.pop(0))
 
-    def attack(self, opponent):
+    def attack(self, opponent, attack):
         pass
 
     def set_prize_cards(self, num_cards: int = 6):
@@ -74,9 +74,10 @@ class Player:
             E. Retreat your Active Pokémon (only once per turn).
             F. Use Abilities (as many as you want).
         """
+        attack_to_use = None
 
         # Attack
-        self.attack(self.opponent)
+        self.attack(self.opponent, attack_to_use)
 
     def has_basic_pokemon_in_hand(self) -> bool:
         pass
@@ -109,7 +110,16 @@ class Player:
         self.hand.extend(cards) if type(cards) == list else self.hand.append(cards)
 
     def place_cards_on_deck(self, card: list[Card] | Card, on_top: bool, your_deck: bool):
-        pass
+        if your_deck:
+            if on_top:
+                self.deck = card + self.deck
+            else:
+                self.deck.extend(card)
+        else:
+            if on_top:
+                self.opponent.deck = card + self.opponent.deck
+            else:
+                self.opponent.deck.extend(card)
 
     def shuffle_cards_into_deck(self, cards: list[Card], your_deck: bool, also_shuffle_deck: bool, on_top: bool = False):
         random.shuffle(cards)
@@ -141,6 +151,17 @@ class Player:
 
     def attach_energy(self, source: str, target: str, energy_type: str, amount: int):
         pass
+
+    def attach_energy_to_pokemon_from_deck(self, pokemon: Card, energy_type: str, amount: int):
+        for i in range(len(self.deck)):
+            current_card = self.deck[i]
+
+            if current_card.type == "Energy" and current_card.energy_type == energy_type:
+                pokemon.attach_energy(self.deck.pop(i))
+                amount -= 1
+
+            if amount == 0:
+                break
 
     def attach_energy_to_pokemon_from_discard_pile(self, pokemon: Card, energy_type: str, amount: int):
         for i in range(len(self.discard_pile)):
@@ -198,6 +219,9 @@ class Player:
         pass
 
     def inflict_paralyzed(self, target: str):
+        pass
+
+    def recover_from_special_condition(self, target: str):
         pass
 
     def discard_benched_pokemon(self, index: int):
@@ -272,6 +296,13 @@ class Player:
 
     def reveal_cards_to_opponent(self, cards: list[Card]):
         pass
+
+    def select_cards_from_deck(self, indexes: list[int]):
+        cards = []
+        for i in indexes:
+            cards.append(self.deck.pop(i))
+
+        return cards
 
     def search_deck_for_cards_by_energy_type(self, energy_type: str):
         card_locations = []
