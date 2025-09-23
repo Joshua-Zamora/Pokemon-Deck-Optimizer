@@ -1,9 +1,10 @@
 import asyncio
+import pathlib
 import pickle
 import urllib.error
 from dataclasses import asdict
 from pprint import pprint
-
+import os
 from scipy.linalg import svd
 from tcgdexsdk import TCGdex, Query
 import numpy as np
@@ -12,6 +13,16 @@ from scipy.cluster import hierarchy
 import pandas as pd  # Optional for nicer output
 
 sdk = TCGdex('en')
+
+
+def get_project_root_by_file():
+    # Get the absolute path of the current file
+    current_file_path = os.path.abspath(__file__)
+    # Get the directory of the current file
+    current_dir = os.path.dirname(current_file_path)
+    # Navigate up to the project root (adjust '..' count as needed)
+    project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))  # Example: two levels up
+    return project_root
 
 
 async def get_all_card_resumes_by_mark(mark):
@@ -56,7 +67,10 @@ async def save_cards(file, cards):
 
 
 def read_cards(file):
-    with open(file, 'rb') as f:
+    root = pathlib.Path(__file__).parent.parent.parent
+    print(f"Reading {file} from {root}")
+    path = root.__str__() + file
+    with open(path, 'rb') as f:
         cards = pickle.load(f)
 
     return cards
@@ -131,6 +145,9 @@ def get_card_pool_specifics(cards):
     min_retreat_cost = 5
     max_retreat_cost = 0
     count = 0
+    max_num_weaknesses = 0
+    max_num_resistances = 0
+
     for card in cards:
         if card.abilities:
             num_abilities += len(card.abilities)
@@ -177,6 +194,15 @@ def get_card_pool_specifics(cards):
                 min_retreat_cost = int(card.retreat)
             if int(card.retreat) > max_retreat_cost:
                 max_retreat_cost = int(card.retreat)
+
+        if card.weaknesses:
+            if len(card.weaknesses) > max_num_weaknesses:
+                max_num_weaknesses = len(card.weaknesses)
+
+        if card.resistances:
+            if len(card.resistances) > max_num_resistances:
+                max_num_resistances = len(card.resistances)
+                print(card.resistances[0])
 
     print(f"Number of abilities: {num_abilities}")
     print(f"\nNumber of unique abilities by effect: {len(abilities)}")
@@ -231,6 +257,8 @@ def get_card_pool_specifics(cards):
     print(f"Stages: {stages}")
     print(f"Minimum retreat cost: {min_retreat_cost}")
     print(f"Maximum retreat cost: {max_retreat_cost}")
+    print(f"Max weaknesses a card has: {max_num_weaknesses}")
+    print(f"Max resistances a card has: {max_num_resistances}")
     exit()
     # Refined keywords (TCG-specific, synonyms)
     keywords = [
@@ -309,9 +337,10 @@ def tfidf_vectorize(texts):
     tfidf = tf * idf
     return tfidf, words
 
+
 if __name__ == "__main__":
-    file_name_resumes = "../../data/cards/all_legal_resumes.pkl"
-    file_name_cards = "../data/cards/all_legal_cards.pkl"
+    file_name_resumes = "/data/cards/all_legal_resumes.pkl"
+    file_name_cards = "/data/cards/all_legal_cards.pkl"
     regs = ["G", "H", "I"]
     # all_pokemon_resumes = read_cards(file_name_resumes)
     # flattened = [item for sublist in all_pokemon_resumes for item in sublist]
