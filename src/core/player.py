@@ -1,15 +1,16 @@
 import random
-from src.core.tcg_card import Card
+from src.cards.card import Card
+from src.cards.pokemon_card import PokemonCard
 
 
 class Player:
     prize_cards: list[Card] = []
     hand: list[Card] = []
-    bench: list[Card] = []
-    active_spot: Card | None = None
+    pokemon: list[PokemonCard] = []
     discard_pile: list[Card] = []
     opponent = None
     modifiers = {}
+    recently_knocked_out_pokemon: PokemonCard = None
 
     def __init__(self, name, deck):
         self.name = name
@@ -41,8 +42,7 @@ class Player:
     def reset_player_state(self):
         self.prize_cards = []
         self.hand = []
-        self.bench = []
-        self.active_spot = None
+        self.pokemon = []
         self.discard_pile = []
         self.deck = self.__original_deck[:]
 
@@ -83,28 +83,29 @@ class Player:
         pass
 
     def card_location(self, card: Card) -> str:
-        return "hand" if card in self.hand else "bench" if card in self.bench else "discard pile"
+        return "hand" if card in self.hand else "bench" if card in self.pokemon[1:] else "discard pile"
 
-    def place_pokemon_on_bench(self, card: Card, index: int = 0):
-        self.bench.insert(index, card)
+    def place_pokemon_on_bench(self, card: PokemonCard):
+        self.pokemon.append(card)
 
     def place_pokemon_on_active_spot(self, card: Card):
-        self.active_spot = card
+        self.pokemon[0] = card
 
     def move_pokemon_from_bench_to_active_spot(self, index: int):
-        self.active_spot = self.bench.pop(index)
+        self.pokemon[0] = self.pokemon.pop(index)
 
     def choose_active_pokemon_from_bench(self, index: int):
-        self.active_spot = self.bench[index]
+        self.pokemon[0] = self.pokemon[index]
 
     def swap_benched_pokemon_with_active_pokemon(self, index: int, your_pokemon: bool):
         if your_pokemon:
-            self.bench[index], self.active_spot = self.active_spot, self.bench[index]
+            self.pokemon[index], self.pokemon[0] = self.pokemon[0], self.pokemon[index]
         else:
-            self.opponent.bench[index], self.opponent.active_spot = self.opponent.active_spot, self.opponent.bench[index]
+            self.opponent.pokemon[index], self.opponent.pokemon[0] = self.opponent.pokemon[0], self.opponent.pokemon[
+                index]
 
     def swap_deck_card_with_benched_card(self, bench_index: int, deck_index: int):
-        self.bench[bench_index], self.deck[deck_index] = self.deck[deck_index], self.bench[bench_index]
+        self.pokemon[bench_index], self.deck[deck_index] = self.deck[deck_index], self.pokemon[bench_index]
 
     def place_cards_into_hand(self, cards: list[Card] | Card):
         self.hand.extend(cards) if type(cards) == list else self.hand.append(cards)
@@ -121,7 +122,8 @@ class Player:
             else:
                 self.opponent.deck.extend(card)
 
-    def shuffle_cards_into_deck(self, cards: list[Card], your_deck: bool, also_shuffle_deck: bool, on_top: bool = False):
+    def shuffle_cards_into_deck(self, cards: list[Card], your_deck: bool, also_shuffle_deck: bool,
+                                on_top: bool = False):
         random.shuffle(cards)
         if your_deck:
             if also_shuffle_deck:
@@ -143,11 +145,12 @@ class Player:
     def evolve_pokemon(self, evolved_pokemon: Card, target_pokemon: Card):
         pass
 
-    def devolve_one_of_opponents_pokemon(self, target: str, index: int, number_of_stages_devolved: int, into_hand: bool):
+    def devolve_one_of_opponents_pokemon(self, target: str, index: int, number_of_stages_devolved: int,
+                                         into_hand: bool):
         if target == "active":
-            self.opponent.active_spot.devolve(number_of_stages_devolved, into_hand)
+            self.opponent.pokemon.devolve(number_of_stages_devolved, into_hand)
         elif target == "bench":
-            self.opponent.bench[index].devolve(number_of_stages_devolved, into_hand)
+            self.opponent.pokemon[index].devolve(number_of_stages_devolved, into_hand)
 
     def attach_energy(self, source: str, target: str, energy_type: str, amount: int):
         pass
@@ -185,8 +188,22 @@ class Player:
             if amount == 0:
                 break
 
-    def move_energy(self, source: str, target: str, energy_type: str, amount: int):
-        pass
+    def move_your_energy(self, source: int, target: int, energy_type: str):
+        source_energies = self.pokemon[source].energy_cards_attached
+
+        for i in range(len(source_energies)):
+            if source_energies[i].energy_type == energy_type:
+                self.pokemon[target].energy_cards_attached.append(self.pokemon[source].energy_cards_attached.pop(i))
+                break
+
+    def move_opponents_energy(self, source: int, target: int, energy_type: str):
+        source_energies = self.opponent.pokemon[source].energy_cards_attached
+
+        for i in range(len(source_energies)):
+            if source_energies[i].energy_type == energy_type:
+                self.opponent.pokemon[target].energy_cards_attached.append(
+                    self.opponent.pokemon[source].energy_cards_attached.pop(i))
+                break
 
     def remove_energy(self, source: str, energy_type: str, amount: int):
         pass
@@ -225,10 +242,10 @@ class Player:
         pass
 
     def discard_benched_pokemon(self, index: int):
-        self.discard_pile.append(self.bench.pop(index))
+        self.discard_pile.append(self.pokemon.pop(index))
 
     def discard_all_cards_attached_to_a_benched_pokemon(self, index: int):
-        self.discard_pile.append(self.bench[index].attached_cards)
+        self.discard_pile.append(self.pokemon[index].attached_cards)
 
     def discard_energy_card_from_hand(self, energy_type: str):
         for i in range(len(self.hand)):
@@ -323,7 +340,7 @@ class Player:
     def search_deck_for_cards_by_health(self, health: int):
         card_locations = []
         for i in range(len(self.deck)):
-            if  self.deck[i].hp <= health:
+            if self.deck[i].hp <= health:
                 card_locations.append(i)
 
         return card_locations
@@ -343,7 +360,6 @@ class Player:
                 card_locations.append(i)
 
         return card_locations
-
 
     def search_discard_pile_for_cards_by_card_type(self, card_type: str):
         card_locations = []

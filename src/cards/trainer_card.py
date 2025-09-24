@@ -1,4 +1,4 @@
-from cards.card import Card
+from src.cards.card import Card
 
 
 class TrainerCard(Card):

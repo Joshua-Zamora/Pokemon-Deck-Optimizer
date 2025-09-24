@@ -1,8 +1,7 @@
-from cards.card import Card
-from cards.energy_card import EnergyCard
-from cards.trainer_card import TrainerCard
-from abilities.actives.active_ability import ActiveAbility
-
+from src.cards.card import Card
+from src.cards.energy_card import EnergyCard
+from src.cards.trainer_card import TrainerCard
+from src.abilities.base import ActiveAbility
 
 class PokemonCard(Card):
     energy_cards_attached: list[EnergyCard]
