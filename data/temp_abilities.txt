@@ -1,0 +1,134 @@
+Number of truly unique ability groups based on first 10 words: 51
+Group 2 (size: 27):
+  - As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.
+  - As long as this Pokémon is in play, it is {G} and {R} type.
+  - As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do 20 less damage (before applying Weakness and Resistance).
+  - As long as this Pokémon is in the Active Spot, prevent all damage done to your Benched Pokémon by attacks from your opponent's Pokémon.
+  - As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.
+  - As long as this Pokémon is on your Bench, attacks used by your Marowak do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+  - As long as this Pokémon is in the Active Spot, your opponent can't have more than 3 Benched Pokémon. If they have 4 or more Benched Pokémon, they discard Benched Pokémon until they have 3 Pokémon on the Bench. If more than one effect changes the number of Benched Pokémon allowed, use the smaller number.
+  - As long as this Pokémon is in the Active Spot, your opponent's Pokémon in play that have any damage counters on them have no Abilities, except for Pokémon ex.
+  - As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon can't retreat.
+  - As long as this Pokémon is in the Active Spot, your opponent can't play any Stadium cards from their hand.
+  - As long as this Pokémon is on your Bench, prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon.
+  - As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)
+  - As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon has no Abilities, except for Midnight Fluttering.
+  - As long as this Pokémon is in the Active Spot, it can evolve during your first turn or the turn you play it.
+  - As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon.
+  - As long as this Pokémon is on your Bench, your Active Pokémon's Retreat Cost is {C}{C} less.
+  - As long as this Pokémon is on your Bench, Benched Stage 2 Pokémon (both yours and your opponent's) have no Abilities.
+  - As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type.
+  - As long as you have at least 1 other Bouffalant in play, all of your Basic {C} Pokémon take 60 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Curly Wall doesn't stack.
+  - As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup.
+  - As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more.
+  - As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards or Pokémon Tool cards from their hand.
+  - As long as this Pokémon is on your Bench, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.
+  - As long as this Pokémon is on your Bench, all of your Steven's Pokémon take 30 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Stone Palace doesn't stack.
+  - As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards from their hand.
+  - As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon.
+  - As long as this Pokémon is in the Active Spot, your opponent can't play any Pokémon that has an Ability from their hand, except for Team Rocket's Pokémon.
+Group 3 (size: 4):
+  - During Pokémon Checkup, if this Pokémon is in the Active Spot, put 1 damage counter on your opponent's Active Pokémon.
+  - During Pokémon Checkup, put 1 damage counter on each Pokémon that has an Ability (both yours and your opponent's), except any Froslass.
+  - During Pokémon Checkup, put 3 more damage counters on your opponent's Burned Pokémon.
+  - During Pokémon Checkup, if this Pokémon is in the Active Spot, put 2 damage counters on each of your opponent's Basic Pokémon.
+Group 4 (size: 2):
+  - When 1 of your Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, you may move a {L} Energy from that Pokémon to this Pokémon.
+  - When 1 of your {W} Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, you may put all Basic {W} Energy attached to that Pokémon into your hand instead of the discard pile.
+Group 5 (size: 2):
+  - When this Pokémon is Knocked Out, flip a coin. If heads, your opponent can't take any Prize cards for it.
+  - When your opponent's Active Pokémon is Knocked Out, flip a coin. If heads, take 1 more Prize card. The effect of Wonder Kiss doesn't stack.
+Group 6 (size: 5):
+  - If this Pokémon would be Knocked Out by damage from an attack, flip a coin. If heads, this Pokémon is not Knocked Out, and its remaining HP becomes 10.
+  - If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, search your deck for a card and put it into your hand. Then, shuffle your deck.
+  - If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, discard 2 random cards from your opponent's hand.
+  - If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, and if you have any Pecharunt ex in play, your opponent takes 1 fewer Prize card.
+  - If your opponent's Basic Pokémon is Knocked Out by damage from an attack used by this Pokémon, take 1 more Prize card.
+Group 7 (size: 2):
+  - If this Pokémon is Confused and is damaged by an attack, flip a coin. If heads, prevent that damage.
+  - If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon.
+Group 8 (size: 12):
+  - If this Pokémon is in the Active Spot and is Knocked Out, flip a coin. If heads, your opponent takes 1 fewer Prize card.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 3 damage counters on the Attacking Pokémon.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), the Attacking Pokémon is now Burned.
+  - If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, move up to 2 {W} Energy cards from this Pokémon to 1 of your Benched Pokémon.
+  - If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, flip a coin. If heads, the Attacking Pokémon is Knocked Out.
+  - If this Pokémon is in the Active Spot, has a Pokémon Tool attached, and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 5 damage counters on the Attacking Pokémon.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), discard an Energy from the Attacking Pokémon.
+  - If this Pokémon and your opponent's Active Pokémon have the same amount of Energy attached, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 3 damage counters on the Attacking Pokémon for each of your Tandemaus, Maushold, and Maushold ex in play.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), the Attacking Pokémon is now Poisoned.
+  - If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, put 6 damage counters on the Attacking Pokémon.
+  - If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), search your deck for up to 2 Pokémon that have "Koffing" in their name and put them onto your Bench. Then, shuffle your deck.
+Group 9 (size: 1):
+  - If Festival Grounds is in play, this Pokémon may use an attack it has twice. If the first attack Knocks Out your opponent's Active Pokémon, you may attack again after your opponent chooses a new Active Pokémon.
+Group 10 (size: 1):
+  - If this Pokémon is Asleep, flip 2 coins instead of 1 during Pokémon Checkup. If either of them is tails, this Pokémon is still Asleep.
+Group 11 (size: 2):
+  - If this Pokémon has full HP, it takes 80 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).
+  - If this Pokémon has full HP and would be Knocked Out by damage from an attack, it is not Knocked Out, and its remaining HP becomes 10.
+Group 12 (size: 10):
+  - If this Pokémon has any Special Energy attached, it gets +100 HP.
+  - If this Pokémon has any {L} Energy attached, it has no Retreat Cost.
+  - If this Pokémon has any {P} Energy attached, it has no Retreat Cost.
+  - If this Pokémon has any {W} Energy attached, it has no Retreat Cost.
+  - If this Pokémon has any {R} Energy attached, it has no Retreat Cost.
+  - If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand.
+  - If this Pokémon has any {D} Energy attached and is damaged by an attack, flip a coin. If heads, prevent that damage.
+  - If your opponent has any cards in their discard pile that have "Colress" in the name, this Pokémon can use the Trifrost attack for {C}.
+  - If this Pokémon has any {D} Energy attached, it gets +100 HP, and the attacks it uses do 100 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+  - If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance).
+Group 13 (size: 2):
+  - If this Pokémon has 3 or more {M} Energy attached, it gets +100 HP.
+  - If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+Group 14 (size: 3):
+  - Your Pokémon in play have no Weakness.
+  - Your Pokémon in play have no Retreat Cost.
+  - Your Basic Pokémon in play have no Retreat Cost.
+Group 15 (size: 2):
+  - If this Pokémon has no Energy attached, it has no Retreat Cost.
+  - If your opponent has no Pokémon ex or Pokémon V in play, this Pokémon can't attack.
+Group 16 (size: 7):
+  - If you have Nidoqueen in play, ignore all Energy in the costs of attacks used by this Pokémon.
+  - If you have Plusle in play, whenever your opponent attaches an Energy card from their hand to 1 of their Pokémon, put 2 damage counters on that Pokémon. The effect of Buddy Pulse doesn't stack.
+  - If you have Solrock in play, prevent all effects of any Stadium done to your Pokémon in play.
+  - If you have any Tera Pokémon in play, this Pokémon can use the Double-Edge attack for {P}.
+  - If you have Karrablast in play, this Pokémon can evolve during your first turn or the turn you play it.
+  - If you have Shelmet in play, this Pokémon can evolve during your first turn or the turn you play it.
+  - If you have the same number of cards in your hand as your opponent, ignore all Energy in the cost of Frightening Howl used by this Pokémon.
+Group 17 (size: 1):
+  - If you have Simisage, Simisear, and Simipour in play, ignore all {C} Energy in the costs of attacks used by this Pokémon.
+Group 18 (size: 1):
+  - This Pokémon may have up to 4 Pokémon Tools attached to it. If it loses this Ability, discard Pokémon Tools from it until only 1 remains.
+
+Group 25 (size: 35):
+  - When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you may prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon until the end of your opponent's next turn.
+
+Group 26 (size: 2):
+Group 27 (size: 2):
+Group 28 (size: 1):
+Group 29 (size: 3):
+Group 30 (size: 1):
+Group 31 (size: 9):
+Group 32 (size: 1):
+Group 33 (size: 2):
+Group 34 (size: 2):
+Group 35 (size: 2):
+Group 36 (size: 1):
+Group 37 (size: 15):
+Group 38 (size: 1):
+Group 39 (size: 2):
+Group 40 (size: 4):
+Group 41 (size: 2):
+Group 42 (size: 2):
+Group 43 (size: 1):
+Group 44 (size: 10):
+Group 45 (size: 1):
+Group 46 (size: 1):
+Group 47 (size: 2):
+Group 48 (size: 4):
+Group 49 (size: 3):
+Group 50 (size: 1):
+Group 51 (size: 1):
+
+Process finished with exit code 0
