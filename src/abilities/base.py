@@ -11,7 +11,7 @@ class Ability(ABC):
 
 class ActiveAbility(Ability, ABC):
     @abstractmethod
-    def can_activate(self, player) -> bool:
+    def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:
         pass
 
     @abstractmethod
