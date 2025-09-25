@@ -1,13 +1,16 @@
 import random
+
+from cards.energy_card import EnergyCard
+from cards.trainer_card import TrainerCard
 from src.cards.card import Card
 from src.cards.pokemon_card import PokemonCard
 
 
 class Player:
-    prize_cards: list[Card] = []
-    hand: list[Card] = []
+    prize_cards: list[PokemonCard | EnergyCard | TrainerCard] = []
+    hand: list[PokemonCard | EnergyCard | TrainerCard] = []
     pokemon: list[PokemonCard] = []
-    discard_pile: list[Card] = []
+    discard_pile: list[PokemonCard | EnergyCard | TrainerCard] = []
     opponent = None
     modifiers = {}
     recently_knocked_out_pokemon: PokemonCard = None
@@ -155,34 +158,34 @@ class Player:
     def attach_energy(self, source: str, target: str, energy_type: str, amount: int):
         pass
 
-    def attach_energy_to_pokemon_from_deck(self, pokemon: Card, energy_type: str, amount: int):
+    def attach_energy_to_pokemon_from_deck(self, target_pokemon: int, energy_type: str, amount: int):
         for i in range(len(self.deck)):
             current_card = self.deck[i]
 
-            if current_card.type == "Energy" and current_card.energy_type == energy_type:
-                pokemon.attach_energy(self.deck.pop(i))
+            if type(current_card) == EnergyCard and current_card.energy_type == energy_type:
+                self.pokemon[target_pokemon].energy_cards_attached.append(self.deck.pop(i))
                 amount -= 1
 
             if amount == 0:
                 break
 
-    def attach_energy_to_pokemon_from_discard_pile(self, pokemon: Card, energy_type: str, amount: int):
+    def attach_energy_to_pokemon_from_discard_pile(self, target_pokemon: int, energy_type: str, amount: int):
         for i in range(len(self.discard_pile)):
             current_card = self.discard_pile[i]
 
-            if current_card.type == "Energy" and current_card.energy_type == energy_type:
-                pokemon.attach_energy(self.discard_pile.pop(i))
+            if type(current_card) == EnergyCard and current_card.energy_type == energy_type:
+                self.pokemon[target_pokemon].energy_cards_attached.append(self.discard_pile.pop(i))
                 amount -= 1
 
             if amount == 0:
                 break
 
-    def attach_energy_to_pokemon_from_hand(self, pokemon: Card, energy_type: str, amount: int):
+    def attach_energy_to_pokemon_from_hand(self, target_pokemon: int, energy_type: str, amount: int):
         for i in range(len(self.hand)):
             current_card = self.hand[i]
 
-            if current_card.type == "Energy" and current_card.energy_type == energy_type:
-                pokemon.attach_energy(self.hand.pop(i))
+            if type(current_card) == EnergyCard and current_card.energy_type == energy_type:
+                self.pokemon[target_pokemon].energy_cards_attached.append(self.hand.pop(i))
                 amount -= 1
 
             if amount == 0:
@@ -208,14 +211,19 @@ class Player:
     def remove_energy(self, source: str, energy_type: str, amount: int):
         pass
 
-    def move_damage_counter(self, source: str, target: str, amount: int):
-        pass
+    def move_damage_counter_to_pokemon(self, source: int, target: int, amount: int):
+        self.pokemon[source].damage_counters_attached -= amount
+        self.pokemon[target].damage_counters_attached += amount
+
+    def get_damage_counter_from_pokemon(self, source: int, target: int, amount: int):
+        self.pokemon[source].damage_counters_attached += amount
+        self.pokemon[target].damage_counters_attached -= amount
 
     def move_damage_counter_to_opponents_pokemon(self, active_pokemon: bool, index: int, amount: int):
         pass
 
-    def attach_damage_counter(self, target: str, amount: int):
-        pass
+    def attach_damage_counter(self, target: int, amount: int):
+        self.pokemon[target].health_points -= (amount * 10)
 
     def attach_damage_counter_to_opponents_pokemon(self, active_pokemon: bool, index: int, amount: int):
         pass

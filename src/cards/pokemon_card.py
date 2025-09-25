@@ -6,6 +6,7 @@ from src.abilities.base import ActiveAbility
 class PokemonCard(Card):
     energy_cards_attached: list[EnergyCard]
     pokemon_tool_attached: TrainerCard
+    damage_counters_attached: int
 
     def __init__(self, name: str, card_id: str, regulation_mark: str, energy_type: str, health_points: int, stage: int,
                  evolves_from: str, attacks: list, abilities: list[ActiveAbility], weakness: tuple[str, int],
