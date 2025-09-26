@@ -26,6 +26,10 @@ class PassiveAbility(Ability, ABC):
         """e.g., Context: {'damage_amount': 100, 'attacker': ...} for damage prevention."""
         pass
 
+    def get_modifiers(self, player: Player, owner: PokemonCard) -> dict:
+        """Return modifiers as a dict, e.g., {'attack_cost_opponent': {'colorless': 1}}."""
+        pass
+
 
 class TriggerAbility(Ability, ABC):
     """Event-based; no manual activation."""

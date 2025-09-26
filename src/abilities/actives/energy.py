@@ -1,6 +1,6 @@
 from abc import ABC
 
-from cards.energy_card import EnergyCard
+from src.cards.energy_card import EnergyCard
 from src.abilities.base import ActiveAbility
 from src.core.player import Player
 
