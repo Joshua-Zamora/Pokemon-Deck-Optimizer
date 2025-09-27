@@ -5,13 +5,20 @@ from src.abilities.base import ActiveAbility
 
 
 class PokemonCard(Card):
-    energy_cards_attached: list[EnergyCard]
-    pokemon_tool_attached: TrainerCard
-    damage_counters_attached: int
+    energy_cards_attached: list[EnergyCard] = []
+    pokemon_tool_attached: TrainerCard | None = None
+    damage_counters_attached: int = 0
+    afflictions: dict = {
+        "asleep": False,
+        "burned": False,
+        "confused": False,
+        "paralyzed": False,
+        "poisoned": False,
+    }
 
     def __init__(self, name: str, card_id: str, regulation_mark: str, energy_type: str, pokemon_category: str,
                  health_points: int, stage: int, evolves_from: str, attacks: list, abilities: list[ActiveAbility],
-                 weakness: tuple[str, int], resistance: tuple[str, int], retreat_cost: int):
+                 weakness: tuple[str, int] | None, resistance: tuple[str, int] | None, retreat_cost: int | None, suffix: str | None):
         super().__init__(name, card_id, regulation_mark)
         self.energy_type = energy_type
         self.pokemon_category = pokemon_category
@@ -23,6 +30,7 @@ class PokemonCard(Card):
         self.weakness = weakness
         self.resistance = resistance
         self.retreat_cost = retreat_cost
+        self.suffix = suffix
 
     def use_ability(self, game_state, index: int):
         self.abilities[index].activate(game_state)

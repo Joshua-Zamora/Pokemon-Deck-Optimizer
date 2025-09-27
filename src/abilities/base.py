@@ -1,6 +1,11 @@
+from __future__ import annotations
 from abc import ABC, abstractmethod
-from src.cards.pokemon_card import PokemonCard
-from src.core.player import Player
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    # These imports are only for type checking and won't run at runtime, avoiding circular imports.
+    from src.cards.pokemon_card import PokemonCard
+    from src.core.player import Player
 
 
 class Ability(ABC):
@@ -10,11 +15,9 @@ class Ability(ABC):
 
 
 class ActiveAbility(Ability, ABC):
-    @abstractmethod
     def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:
         pass
 
-    @abstractmethod
     def activate(self, player: Player, source: int = 0, target: int = 1):
         pass
 
@@ -34,7 +37,5 @@ class PassiveAbility(Ability, ABC):
 class TriggerAbility(Ability, ABC):
     """Event-based; no manual activation."""
 
-    @property
-    @abstractmethod
     def trigger_event(self) -> str:  # e.g., 'on_ko', 'on_damage', 'end_turn'
         pass

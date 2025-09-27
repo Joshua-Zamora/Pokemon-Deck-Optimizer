@@ -3,7 +3,7 @@ from abilities.base import TriggerAbility
 from core.player import Player
 
 
-class MoveEnergyOnKnockoutTriggerAbility(TriggerAbility, ABC):
+class MoveEnergyOnKnockoutTriggerAbility(TriggerAbility):
     def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
         super().__init__(name, description)
         self.energy_type = energy_type

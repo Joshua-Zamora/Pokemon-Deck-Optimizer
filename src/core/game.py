@@ -5,6 +5,7 @@ from player import Player
 class Game:
     winner: Player | None = None
     enter_sudden_death: bool = False
+    in_pokemon_checkup: bool = False
     all_abilities: dict = {}
     all_attacks: dict = {}
 

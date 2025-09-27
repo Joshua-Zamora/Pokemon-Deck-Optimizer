@@ -1,7 +1,7 @@
 import random
 
-from cards.energy_card import EnergyCard
-from cards.trainer_card import TrainerCard
+from src.cards.energy_card import EnergyCard
+from src.cards.trainer_card import TrainerCard
 from src.cards.card import Card
 from src.cards.pokemon_card import PokemonCard
 
@@ -14,6 +14,7 @@ class Player:
     opponent = None
     modifiers = {}
     recently_knocked_out_pokemon: PokemonCard = None
+    supporter_effects_mitigated = False
 
     def __init__(self, name, deck):
         self.name = name

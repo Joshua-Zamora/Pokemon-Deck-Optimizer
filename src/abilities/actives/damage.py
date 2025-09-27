@@ -4,7 +4,7 @@ from abilities.base import ActiveAbility
 from core.player import Player
 
 
-class MoveDamageCounterToPokemonActiveAbility(ActiveAbility, ABC):
+class MoveDamageCounterToPokemonActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, amount: int = 1, pokemon_restriction: str = None):
         super().__init__(name, description)
         self.amount = amount
@@ -20,7 +20,7 @@ class MoveDamageCounterToPokemonActiveAbility(ActiveAbility, ABC):
         player.move_damage_counter_to_pokemon(source, target, self.amount)
 
 
-class GetDamageCounterFromPokemonActiveAbility(ActiveAbility, ABC):
+class GetDamageCounterFromPokemonActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, amount: int = 1):
         super().__init__(name, description)
         self.amount = amount

@@ -210,12 +210,12 @@ def get_card_pool_specifics(cards):
 
     for ability_effect, names in abilities.items():
         unique_items = list(set(names))
+        abilities[ability_effect] = unique_items
+        # print(f"{ability_effect}: {unique_items}")
 
-        if len(unique_items) > 1:
-            print(f"{ability_effect}: {len(unique_items)}, {unique_items}")
-        else:
-            num_unique_effects += 1
-    print(f"Number of ability effects that have one name tied to it: {num_unique_effects}")
+    to_dict(abilities)
+
+    # print(f"Number of ability effects that have one name tied to it: {num_unique_effects}")
 
     print(f"\nNumber of unique abilities by name: {len(abilities_by_name)}")
 
@@ -337,6 +337,30 @@ def tfidf_vectorize(texts):
     tfidf = tf * idf
     return tfidf, words
 
+def to_dict(group_dict: dict):
+    unique_abilities = sorted(group_dict)
+
+    # Output the dictionary code
+    print("abilities = {")
+    for ability in unique_abilities:
+        # Escape double quotes in the ability text if any
+        escaped = ability.replace('"', '\\"')
+        print(f'    "{escaped}": {group_dict[ability]},')
+    print("}")
+
+
+def read_file_to_string(filename):
+    try:
+        root = pathlib.Path(__file__).parent.parent.parent
+        path = root.__str__() + filename
+        with open(path, 'r', encoding='utf-8') as file:
+            content = file.read()
+        return content
+    except FileNotFoundError:
+        raise FileNotFoundError(f"The file '{filename}' was not found.")
+    except IOError as e:
+        raise IOError(f"An error occurred while reading the file '{filename}': {e}")
+
 
 if __name__ == "__main__":
     file_name_resumes = "/data/cards/all_legal_resumes.pkl"
@@ -351,3 +375,4 @@ if __name__ == "__main__":
     # asyncio.run(save_cards(file_name_cards, all_pokemon_cards))
     # sort_cards_into_pickle_files(all_legal_pokemon_cards)
     get_card_pool_specifics(all_legal_pokemon_cards)
+    #to_dict(read_file_to_string("\\data\\attacks_sorted_by_activation.txt"))

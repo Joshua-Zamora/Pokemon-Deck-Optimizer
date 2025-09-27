@@ -5,7 +5,7 @@ from src.abilities.base import ActiveAbility
 from src.core.player import Player
 
 
-class MoveEnergyActiveAbility(ActiveAbility, ABC):
+class MoveEnergyActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, energy_type: str, your_own: bool, amount: int = 1):
         super().__init__(name, description)
         self.energy_type = energy_type
@@ -20,7 +20,29 @@ class MoveEnergyActiveAbility(ActiveAbility, ABC):
                 player.move_opponents_energy(source, target, self.energy_type)
 
 
-class AttachEnergyFromHandActiveAbility(ActiveAbility, ABC):
+class MoveEnergyFromBenchToActiveActiveAbility(ActiveAbility):
+    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
+        super().__init__(name, description)
+        self.energy_type = energy_type
+        self.amount = amount
+
+    def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:
+        available = 0
+
+        for poke in player.pokemon[1:]:
+            for energy in poke.energy_cards_attached:
+                if energy.energy_type == self.energy_type:
+                    available += 1
+
+        return available >= self.amount
+
+    def activate(self, player: Player, source: int = 0, target: int = 1):
+        if self.can_activate(player):
+            for i in range(self.amount):
+                player.move_your_energy(source, 0, self.energy_type)
+
+
+class AttachEnergyFromHandActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, energy_type: str, amount: int = 1, pokemon_restriction: str = None):
         super().__init__(name, description)
         self.energy_type = energy_type
@@ -41,7 +63,7 @@ class AttachEnergyFromHandActiveAbility(ActiveAbility, ABC):
         player.attach_energy_to_pokemon_from_hand(target, self.energy_type, self.amount)
 
 
-class AttachEnergyFromDiscardPileActiveAbility(ActiveAbility, ABC):
+class AttachEnergyFromDiscardPileActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
         super().__init__(name, description)
         self.energy_type = energy_type
@@ -58,7 +80,7 @@ class AttachEnergyFromDiscardPileActiveAbility(ActiveAbility, ABC):
         player.attach_energy_to_pokemon_from_discard_pile(target, self.energy_type, self.amount)
 
 
-class AttachEnergyFromDiscardPileWithDamageActiveAbility(ActiveAbility, ABC):
+class AttachEnergyFromDiscardPileWithDamageActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, energy_type: str, amount: int = 1, damage_counters: int = 1):
         super().__init__(name, description)
         self.energy_type = energy_type
@@ -83,7 +105,7 @@ class AttachEnergyFromDiscardPileWithDamageActiveAbility(ActiveAbility, ABC):
         player.attach_damage_counter(target, self.damage_counters)
 
 
-class AttachEnergyFromDeckActiveAbility(ActiveAbility, ABC):
+class AttachEnergyFromDeckActiveAbility(ActiveAbility):
     def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
         super().__init__(name, description)
         self.energy_type = energy_type
