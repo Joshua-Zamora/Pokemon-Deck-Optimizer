@@ -1,11 +1,13 @@
 from abc import ABC
-from abilities.base import TriggerAbility
-from core.player import Player
+from src.abilities.base import TriggerAbility
+from src.core.player import Player
 
 
 class MoveEnergyOnKnockoutTriggerAbility(TriggerAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = []
+    descriptions: list[str] = []
+
+    def __init__(self, energy_type: str, amount: int = 1):
         self.energy_type = energy_type
         self.amount = amount
 

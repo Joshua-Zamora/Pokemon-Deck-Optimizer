@@ -1,13 +1,13 @@
-from abc import ABC
-
 from src.cards.energy_card import EnergyCard
 from src.abilities.base import ActiveAbility
 from src.core.player import Player
 
 
 class MoveEnergyActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, your_own: bool, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = []
+    descriptions: list[str] = []
+
+    def __init__(self, energy_type: str, your_own: bool, amount: int = 1):
         self.energy_type = energy_type
         self.your_own = your_own
         self.amount = amount
@@ -21,8 +21,11 @@ class MoveEnergyActiveAbility(ActiveAbility):
 
 
 class MoveEnergyFromBenchToActiveActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = ["Fire Off"]
+    descriptions: list[str] = [
+        "As often as you like during your turn, you may move a {R} Energy from 1 of your Benched Pokémon to your Active Pokémon."]
+
+    def __init__(self, energy_type: str, amount: int = 1):
         self.energy_type = energy_type
         self.amount = amount
 
@@ -43,8 +46,14 @@ class MoveEnergyFromBenchToActiveActiveAbility(ActiveAbility):
 
 
 class AttachEnergyFromHandActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1, pokemon_restriction: str = None):
-        super().__init__(name, description)
+    names: list[str] = ["Electric Streamer", "Inferno Fandango", "Super Cold"]
+    descriptions: list[str] = [
+        "As often as you like during your turn, you may attach a Basic {L} Energy card from your hand to 1 of your Iono's Pokémon.",
+        "As often as you like during your turn, you may attach a Basic {R} Energy card from your hand to 1 of your Pokémon.",
+        "As often as you like during your turn, you may attach a Basic {W} Energy card from your hand to 1 of your Pokémon."
+        ]
+
+    def __init__(self, energy_type: str, amount: int = 1, pokemon_restriction: str = None):
         self.energy_type = energy_type
         self.amount = amount
         self.pokemon_restriction = pokemon_restriction
@@ -64,8 +73,10 @@ class AttachEnergyFromHandActiveAbility(ActiveAbility):
 
 
 class AttachEnergyFromDiscardPileActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = []
+    descriptions: list[str] = []
+
+    def __init__(self, energy_type: str, amount: int = 1):
         self.energy_type = energy_type
         self.amount = amount
 
@@ -81,8 +92,11 @@ class AttachEnergyFromDiscardPileActiveAbility(ActiveAbility):
 
 
 class AttachEnergyFromDiscardPileWithDamageActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1, damage_counters: int = 1):
-        super().__init__(name, description)
+    names: list[str] = ["Psychic Embrace"]
+    descriptions: list[str] = [
+        "As often as you like during your turn, you may attach a Basic {P} Energy card from your discard pile to 1 of your {P} Pokémon. If you attached Energy to a Pokémon in this way, put 2 damage counters on that Pokémon. You can't use this Ability on a Pokémon that would be Knocked Out."]
+
+    def __init__(self, energy_type: str, amount: int = 1, damage_counters: int = 1):
         self.energy_type = energy_type
         self.amount = amount
         self.damage_counters = damage_counters
@@ -106,8 +120,10 @@ class AttachEnergyFromDiscardPileWithDamageActiveAbility(ActiveAbility):
 
 
 class AttachEnergyFromDeckActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = []
+    descriptions: list[str] = []
+
+    def __init__(self, energy_type: str, amount: int = 1):
         self.energy_type = energy_type
         self.amount = amount
 

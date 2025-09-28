@@ -4,8 +4,11 @@ from src.core.player import Player
 
 
 class IncreaseOpponentAttackCostPassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, extra_cost: list):
-        super().__init__(name, description)
+    names: list[str] = ["Dazzling Gaze", "Quaking Zone"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more."]
+
+    def __init__(self, extra_cost: list):
         self.extra_cost = extra_cost
 
     def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
@@ -16,8 +19,11 @@ class IncreaseOpponentAttackCostPassiveAbility(PassiveAbility):
 
 
 class IncreaseOpponentAttackCostOfBasicPokemonPassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, extra_cost: list):
-        super().__init__(name, description)
+    names: list[str] = ["Primal Root"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more."]
+
+    def __init__(self, extra_cost: list):
         self.extra_cost = extra_cost
 
     def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
@@ -29,8 +35,10 @@ class IncreaseOpponentAttackCostOfBasicPokemonPassiveAbility(PassiveAbility):
 
 
 class ChangePokemonEnergyTypePassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, energy_types: list[str]):
-        super().__init__(name, description)
+    names: list[str] = ["Double Type"]
+    descriptions: list[str] = ["As long as this Pokémon is in play, it is {G} and {R} type."]
+
+    def __init__(self, energy_types: list[str]):
         self.energy_types = energy_types
 
     def can_activate(self, player: Player, ability_owner: PokemonCard):
@@ -41,8 +49,11 @@ class ChangePokemonEnergyTypePassiveAbility(PassiveAbility):
 
 
 class NoRetreatCostForEnergyTypePokemonPassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, energy_type: str):
-        super().__init__(name, description)
+    names: list[str] = ["Metal Bridge", "Lunar Zone"]
+    descriptions: list[str] = ["All of your Pokémon that have {M} Energy attached have no Retreat Cost.",
+                               "All of your Pokémon that have {P} Energy attached have no Retreat Cost."]
+
+    def __init__(self, energy_type: str):
         self.energy_type = energy_type
 
     def can_activate(self, player: Player):
@@ -57,9 +68,41 @@ class NoRetreatCostForEnergyTypePokemonPassiveAbility(PassiveAbility):
         return {f"retreat_cost_for_pokemon_with_{self.energy_type}_attached": 0} if self.can_activate(player) else {}
 
 
+class DecreaseRetreatCostIfOnBenchPassiveAbility(PassiveAbility):
+    names: list[str] = ["Secret Forest Path"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is on your Bench, your Active Pokémon's Retreat Cost is {C}{C} less."]
+
+    def __init__(self, amount: int, energy_type: str):
+        self.amount = amount
+        self.energy_type = energy_type
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard):
+        return ability_owner in player.pokemon[1:]
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {f"decrease_retreat_cost_by_{self.energy_type}": self.amount} if self.can_activate(player,
+                                                                                                  ability_owner) else {}
+
+
+class OpponentsActivePokemonCantRetreatPassiveAbility(PassiveAbility):
+    names: list[str] = ["Primordial Tentacles"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon can't retreat."]
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
+        return ability_owner == player.pokemon[0]
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"opponent_can_retreat": False} if self.can_activate(player, ability_owner) else {}
+
+
 class ChangePokemonEnergyTypeIfToolAttachedPassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, energy_type: list[str], tool: str):
-        super().__init__(name, description)
+    names: list[str] = ["Dual Core"]
+    descriptions: list[str] = [
+        "As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type."]
+
+    def __init__(self, energy_type: list[str], tool: str):
         self.energy_type = energy_type
         self.tool = tool
 
@@ -68,3 +111,43 @@ class ChangePokemonEnergyTypeIfToolAttachedPassiveAbility(PassiveAbility):
 
     def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
         return {"pokemon_energy_types": self.energy_type} if self.can_activate(ability_owner) else {}
+
+
+class AttacksCostLessForCardInDiscardPilePassiveAbility(PassiveAbility):
+    names: list[str] = ["Food Prep"]
+    descriptions: list[str] = ["Attacks used by this Pokémon cost {C} less for each Kofu card in your discard pile."]
+
+    def __init__(self, energy_type: str, amount: int, pokemon_restriction: str):
+        self.energy_type = energy_type
+        self.amount = amount
+        self.pokemon_restriction = pokemon_restriction
+
+    def can_activate(self, player: Player) -> bool:
+        for card in player.discard_pile:
+            if self.pokemon_restriction in card.name:
+                return True
+
+        return False
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {
+            f"attack_cost_of_this_card_is_{self.energy_type}_less_for_each{self.pokemon_restriction}": self.amount} if self.can_activate(
+            player) else {}
+
+
+class AttacksCostLessForEachOpponentBenchedPokemonPassiveAbility(PassiveAbility):
+    names: list[str] = ["Hustle Play"]
+    descriptions: list[str] = [
+        "Attacks used by this Pokémon cost {C} less for each of your opponent's Benched Pokémon."]
+
+    def __init__(self, energy_type: str, amount: int):
+        self.energy_type = energy_type
+        self.amount = amount
+
+    def can_activate(self, player: Player) -> bool:
+        return len(player.opponent.pokemon) > 1
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {
+            f"attack_cost_of_this_card_is_{self.energy_type}_less_for_each_opponent_benched": self.amount} if self.can_activate(
+            player) else {}

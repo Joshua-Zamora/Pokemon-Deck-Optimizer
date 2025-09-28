@@ -4,8 +4,10 @@ from src.core.player import Player
 
 
 class WeaknessStrengthModifierOnOpponentsActivePassiveAbility(PassiveAbility):
-    def __init__(self, name:str, description:str, modifier: int):
-        super().__init__(name, description)
+    names: list[str] = ["Ancient Way"]
+    descriptions: list[str] = ["Apply Weakness for your opponent's Active Pokémon as ×4 instead."]
+
+    def __init__(self, modifier: int):
         self.modifier = modifier
 
     def can_activate(self, player: Player) -> bool:

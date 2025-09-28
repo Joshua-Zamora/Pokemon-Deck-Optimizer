@@ -4,8 +4,12 @@ from src.core.player import Player
 
 
 class BasicPokemonInPlayHaveNoAbilities(PassiveAbility):
-    def __init__(self, name: str, description: str):
-        super().__init__(name, description)
+    names: list[str] = ["Mischievous Lock"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock."]
+
+    def __init__(self, pokemon_restriction: str) -> None:
+        self.pokemon_restriction = pokemon_restriction
 
     def can_activate(self, player: Player, ability_owner: PokemonCard):
         if ability_owner != player.pokemon[0]:
@@ -22,13 +26,14 @@ class BasicPokemonInPlayHaveNoAbilities(PassiveAbility):
         return False
 
     def activate(self, player: Player, ability_owner: PokemonCard):
-        return {'basic_pokemon_no_abilities': True} if self.can_activate(player,
-                                                                         ability_owner) else {}  # except for Mischievous Lock.
+        return {f'basic_pokemon_no_abilities_except_{self.pokemon_restriction}': True} if self.can_activate(player,
+                                                                                                            ability_owner) else {}
 
 
 class PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture(PassiveAbility):
-    def __init__(self, name: str, description: str):
-        super().__init__(name, description)
+    names: list[str] = ["Initialization"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)"]
 
     def can_activate(self, player: Player, ability_owner: PokemonCard):
         if ability_owner != player.pokemon[0]:
@@ -47,3 +52,47 @@ class PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture(PassiveAbility):
     def activate(self, player: Player, ability_owner: PokemonCard):
         return {'pokemon_with_rule_box_no_abilities_except_future': True} if self.can_activate(player,
                                                                                                ability_owner) else {}
+
+
+class OpponentsActivePokemonHaveNoAbilitiesPassiveAbility(PassiveAbility):
+    names: list[str] = ["Midnight Fluttering"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon has no Abilities, except for Midnight Fluttering."]
+
+    def __init__(self, pokemon_restriction: str):
+        self.pokemon_restriction = pokemon_restriction
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard):
+        return ability_owner == player.pokemon[0]
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {f"opponent_active_have_no_abilities_except_{self.pokemon_restriction}": True} if self.can_activate(
+            player, ability_owner) else {}
+
+
+class PokemonWithDamageHaveNoAbilitiesPassiveAbility(PassiveAbility):
+    names: list[str] = ["Cursed Land"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, your opponent's Pokémon in play that have any damage counters on them have no Abilities, except for Pokémon ex."]
+
+    def __init__(self, pokemon_restriction: str):
+        self.pokemon_restriction = pokemon_restriction
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard):
+        return ability_owner == player.pokemon[0]
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {f"opponent_pokemon_no_abilities_except_{self.pokemon_restriction}": True} if self.can_activate(player,
+                                                                                                               ability_owner) else {}
+
+
+class BenchedStageTwoPokemonHaveNoAbilitiesPassiveAbility(PassiveAbility):
+    names: list[str] = ["Sticky Bind"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is on your Bench, Benched Stage 2 Pokémon (both yours and your opponent's) have no Abilities."]
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard):
+        return ability_owner in player.pokemon[1:]
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"bench_stage_two_no_abilities": True} if self.can_activate(player, ability_owner) else {}

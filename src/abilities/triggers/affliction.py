@@ -1,13 +1,15 @@
 from src.abilities.base import TriggerAbility
 from src.cards.pokemon_card import PokemonCard
-from src.cards.trainer_card import TrainerCard
 from src.core.game import Game
 from src.core.player import Player
 
 
 class AddDamageToPoisonedPokemonTriggerAbility(TriggerAbility):
-    def __init__(self, name:str, description:str, damage_counters: int):
-        super().__init__(name, description)
+    names: list[str] = ["Toxic Subjugation"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup."]
+
+    def __init__(self, damage_counters: int):
         self.damage_counters = damage_counters
 
     def can_activate(self, game_state: Game, player: Player) -> bool:
@@ -19,8 +21,9 @@ class AddDamageToPoisonedPokemonTriggerAbility(TriggerAbility):
 
 
 class PreventAllEffectsOnSupportCardPlayedTriggerAbility(TriggerAbility):
-    def __init__(self, name:str, description:str):
-        super().__init__(name, description)
+    names: list[str] = ["Wide Wall"]
+    descriptions: list[str] = [
+        "As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon."]
 
     def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
         return ability_owner == player.pokemon[0]

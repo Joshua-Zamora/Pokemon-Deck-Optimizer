@@ -1,12 +1,13 @@
-from abc import ABC
-
-from abilities.base import ActiveAbility
-from core.player import Player
+from src.abilities.base import ActiveAbility
+from src.core.player import Player
 
 
 class MoveDamageCounterToPokemonActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, amount: int = 1, pokemon_restriction: str = None):
-        super().__init__(name, description)
+    names: list[str] = ["Rocket Brain"]
+    descriptions: list[str] = [
+        "As often as you like during your turn, you may move 1 damage counter from 1 of your Team Rocket's Pokémon to another of your Pokémon."]
+
+    def __init__(self, amount: int = 1, pokemon_restriction: str = None):
         self.amount = amount
         self.pokemon_restriction = pokemon_restriction
 
@@ -21,8 +22,11 @@ class MoveDamageCounterToPokemonActiveAbility(ActiveAbility):
 
 
 class GetDamageCounterFromPokemonActiveAbility(ActiveAbility):
-    def __init__(self, name: str, description: str, amount: int = 1):
-        super().__init__(name, description)
+    names: list[str] = ["Strange Behavior"]
+    descriptions: list[str] = [
+        "As often as you like during your turn, you may move 1 damage counter from 1 of your other Pokémon to this Pokémon."]
+
+    def __init__(self, amount: int = 1):
         self.amount = amount
 
     def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:

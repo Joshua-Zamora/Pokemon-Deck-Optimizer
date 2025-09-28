@@ -1,5 +1,5 @@
 from __future__ import annotations
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -9,9 +9,8 @@ if TYPE_CHECKING:
 
 
 class Ability(ABC):
-    def __init__(self, name: str, description: str):
-        self.name = name
-        self.description = description
+    names: list[str] = []
+    descriptions: list[str] = []
 
 
 class ActiveAbility(Ability, ABC):

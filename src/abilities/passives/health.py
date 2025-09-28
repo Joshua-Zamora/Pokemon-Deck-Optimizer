@@ -4,8 +4,10 @@ from src.core.player import Player
 
 
 class IncreaseAllPokemonHealthPassiveAbility(PassiveAbility):
-    def __init__(self, name: str, description: str, amount: int):
-        super().__init__(name, description)
+    names: list[str] = ["Vibrant Dance"]
+    descriptions: list[str] = ["All of your Pokémon in play get +40 HP. The effect of Vibrant Dance doesn't stack."]
+
+    def __init__(self, amount: int):
         self.amount = amount
 
     def can_activate(self, player: Player) -> bool:

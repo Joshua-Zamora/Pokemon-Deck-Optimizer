@@ -1,11 +1,13 @@
 from src.abilities.actives.damage import *
 from src.abilities.actives.energy import *
 from src.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
-    PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture
+    PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture, OpponentsActivePokemonHaveNoAbilitiesPassiveAbility, \
+    PokemonWithDamageHaveNoAbilitiesPassiveAbility, BenchedStageTwoPokemonHaveNoAbilitiesPassiveAbility
 from src.abilities.passives.board import LimitNumberOfOpponentBenchedPokemonPassiveAbility, \
     OpponentCantPlayItemCardsPassiveAbility, OpponentCantPlayItemCardsOrToolsPassiveAbility, \
-    CantPlayPokemonWithAbilityExceptForPassiveAbility
+    CantPlayPokemonWithAbilityExceptForPassiveAbility, OpponentCantPlayStadiumCardsPassiveAbility
 from src.abilities.passives.damage import *
+from src.abilities.passives.damage import IncreasePokemonAttackDamageForPokemonPassiveAbility
 from src.abilities.passives.energy import *
 from src.abilities.passives.evolution import PokemonCanEvolveImmediatelyPassiveAbility
 from src.abilities.passives.health import *
@@ -15,48 +17,89 @@ from src.abilities.triggers.affliction import AddDamageToPoisonedPokemonTriggerA
 from src.abilities.triggers.damage import HealWhenAttachingEnergyTriggerAbility
 
 abilities = {
-    "All of your Pokémon in play get +40 HP. The effect of Vibrant Dance doesn't stack.": IncreaseAllPokemonHealthPassiveAbility("Vibrant Dance", "All of your Pokémon in play get +40 HP. The effect of Vibrant Dance doesn't stack.", 40),
-    "All of your Pokémon take 10 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).": DecreaseOpponentAttackDamagePassiveAbility("Protective Bell, Arm Thrust Practice", "All of your Pokémon take 10 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).", 10),
-    "All of your Pokémon that have any {M} Energy attached take 20 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).": DecreaseOpponentAttackDamageOnEnergiesAttachedPassiveAbility("Gear Coating", "All of your Pokémon that have any {M} Energy attached take 20 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).", "metal", 20),
-    "All of your Pokémon that have {M} Energy attached have no Retreat Cost.": NoRetreatCostForEnergyTypePokemonPassiveAbility("Metal Bridge", "All of your Pokémon that have {M} Energy attached have no Retreat Cost.", "metal"),
-    "All of your Pokémon that have {P} Energy attached have no Retreat Cost.": NoRetreatCostForEnergyTypePokemonPassiveAbility("Lunar Zone", "All of your Pokémon that have {P} Energy attached have no Retreat Cost.", "psychic"),
-    "Apply Weakness for your opponent's Active Pokémon as ×4 instead.": WeaknessStrengthModifierOnOpponentsActivePassiveAbility("Ancient Way", "Apply Weakness for your opponent's Active Pokémon as ×4 instead.", 4),
-    "As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type.": ChangePokemonEnergyTypeIfToolAttachedPassiveAbility("Dual Core", "As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type.", ["fighting", "metal"], "Future Booster Energy Capsule"),
-    "As long as this Pokémon is in play, it is {G} and {R} type.": ChangePokemonEnergyTypePassiveAbility("Double Type", "As long as this Pokémon is in play, it is {G} and {R} type.", ["grass", "fire"]),
-    "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.": BasicPokemonInPlayHaveNoAbilities("Mischievous Lock", "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock."),
-    "As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)": PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture("Initialization", "As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)"),
-    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.": IncreaseOpponentAttackCostPassiveAbility("Dazzling Gaze, Quaking Zone", "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.", ["colorless", 1]),
-    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do 20 less damage (before applying Weakness and Resistance).": DecreaseOpponentAttackDamageIfActivePassiveAbility("Pressure", "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do 20 less damage (before applying Weakness and Resistance).", 20),
-    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more.": IncreaseOpponentAttackCostOfBasicPokemonPassiveAbility("Primal Root", "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more.", ["colorless", 1]),
-    "As long as this Pokémon is in the Active Spot, it can evolve during your first turn or the turn you play it.": PokemonCanEvolveImmediatelyPassiveAbility("Boosted Evolution", "As long as this Pokémon is in the Active Spot, it can evolve during your first turn or the turn you play it."),
-    "As long as this Pokémon is in the Active Spot, prevent all damage done to your Benched Pokémon by attacks from your opponent's Pokémon.": MitigateAllBenchDamagePassiveAbility("Adverse Weather", "As long as this Pokémon is in the Active Spot, prevent all damage done to your Benched Pokémon by attacks from your opponent's Pokémon.")
-    "As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup.": AddDamageToPoisonedPokemonTriggerAbility("Toxic Subjugation", "As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup.", 5),
-    "As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon.": HealWhenAttachingEnergyTriggerAbility("Auto Heal", "As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon.", 9)
-    "As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon.": PreventAllEffectsOnSupportCardPlayedTriggerAbility("Wide Wall", "As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon."),
-    "As long as this Pokémon is in the Active Spot, your opponent can't have more than 3 Benched Pokémon. If they have 4 or more Benched Pokémon, they discard Benched Pokémon until they have 3 Pokémon on the Bench. If more than one effect changes the number of Benched Pokémon allowed, use the smaller number.": LimitNumberOfOpponentBenchedPokemonPassiveAbility("Dust Field", "As long as this Pokémon is in the Active Spot, your opponent can't have more than 3 Benched Pokémon. If they have 4 or more Benched Pokémon, they discard Benched Pokémon until they have 3 Pokémon on the Bench. If more than one effect changes the number of Benched Pokémon allowed, use the smaller number.", 3),
-    "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards from their hand.": OpponentCantPlayItemCardsPassiveAbility("Daunting Gaze", "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards from their hand."),
-    "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards or Pokémon Tool cards from their hand.": OpponentCantPlayItemCardsOrToolsPassiveAbility("Oceanic Curse", "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards or Pokémon Tool cards from their hand."),
-    "As long as this Pokémon is in the Active Spot, your opponent can't play any Pokémon that has an Ability from their hand, except for Team Rocket's Pokémon.": CantPlayPokemonWithAbilityExceptForPassiveAbility("Potent Glare", "As long as this Pokémon is in the Active Spot, your opponent can't play any Pokémon that has an Ability from their hand, except for Team Rocket's Pokémon."),
-    "As long as this Pokémon is in the Active Spot, your opponent can't play any Stadium cards from their hand.": ['Massive Body', 'Helical Swell'],
-    "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon can't retreat.": ['Primordial Tentacles'],
-    "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon has no Abilities, except for Midnight Fluttering.": ['Midnight Fluttering'],
-    "As long as this Pokémon is in the Active Spot, your opponent's Pokémon in play that have any damage counters on them have no Abilities, except for Pokémon ex.": ['Cursed Land'],
-    "As long as this Pokémon is on your Bench, Benched Stage 2 Pokémon (both yours and your opponent's) have no Abilities.": ['Sticky Bind'],
-    "As long as this Pokémon is on your Bench, all of your Steven's Pokémon take 30 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Stone Palace doesn't stack.": ['Stone Palace'],
-    "As long as this Pokémon is on your Bench, attacks used by your Marowak do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Cheering Bone'],
-    "As long as this Pokémon is on your Bench, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.": ['Plume Protection'],
-    "As long as this Pokémon is on your Bench, prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon.": ['Storehouse Hideaway', 'So Submerged'],
-    "As long as this Pokémon is on your Bench, your Active Pokémon's Retreat Cost is {C}{C} less.": ['Secret Forest Path'],
-    "As long as you have at least 1 other Bouffalant in play, all of your Basic {C} Pokémon take 60 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Curly Wall doesn't stack.": ['Curly Wall'],
-    "As often as you like during your turn, you may attach a Basic {L} Energy card from your hand to 1 of your Iono's Pokémon.": AttachEnergyFromHandActiveAbility("Electric Streamer", "As often as you like during your turn, you may attach a Basic {L} Energy card from your hand to 1 of your Iono's Pokémon.", "lightning", 1, "Iono"),
-    "As often as you like during your turn, you may attach a Basic {P} Energy card from your discard pile to 1 of your {P} Pokémon. If you attached Energy to a Pokémon in this way, put 2 damage counters on that Pokémon. You can't use this Ability on a Pokémon that would be Knocked Out.": AttachEnergyFromDiscardPileWithDamageActiveAbility("Psychic Embrace", "As often as you like during your turn, you may attach a Basic {P} Energy card from your discard pile to 1 of your {P} Pokémon. If you attached Energy to a Pokémon in this way, put 2 damage counters on that Pokémon. You can't use this Ability on a Pokémon that would be Knocked Out.", "psychic", 1, 2),
-    "As often as you like during your turn, you may attach a Basic {R} Energy card from your hand to 1 of your Pokémon.": AttachEnergyFromHandActiveAbility("Inferno Fandango", "As often as you like during your turn, you may attach a Basic {R} Energy card from your hand to 1 of your Pokémon.", "fire", 1),
-    "As often as you like during your turn, you may attach a Basic {W} Energy card from your hand to 1 of your Pokémon.": AttachEnergyFromHandActiveAbility("Super Cold", "As often as you like during your turn, you may attach a Basic {W} Energy card from your hand to 1 of your Pokémon.", "water", 1),
-    "As often as you like during your turn, you may move 1 damage counter from 1 of your Team Rocket's Pokémon to another of your Pokémon.": MoveDamageCounterToPokemonActiveAbility("Rocket Brain", "As often as you like during your turn, you may move 1 damage counter from 1 of your Team Rocket's Pokémon to another of your Pokémon.", 1, "Team Rocket"),
-    "As often as you like during your turn, you may move 1 damage counter from 1 of your other Pokémon to this Pokémon.": GetDamageCounterFromPokemonActiveAbility("Strange Behavior", "As often as you like during your turn, you may move 1 damage counter from 1 of your other Pokémon to this Pokémon.", 1),
-    "As often as you like during your turn, you may move a {R} Energy from 1 of your Benched Pokémon to your Active Pokémon.": MoveEnergyFromBenchToActiveActiveAbility("Fire Off", "As often as you like during your turn, you may move a {R} Energy from 1 of your Benched Pokémon to your Active Pokémon.", "fire", 1),
-    "Attacks used by this Pokémon cost {C} less for each Kofu card in your discard pile.": ['Food Prep'],
-    "Attacks used by this Pokémon cost {C} less for each of your opponent's Benched Pokémon.": ['Hustle Play'],
+    "All of your Pokémon in play get +40 HP. The effect of Vibrant Dance doesn't stack.":
+        IncreaseAllPokemonHealthPassiveAbility(40),
+    "All of your Pokémon take 10 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).":
+        DecreaseOpponentAttackDamagePassiveAbility(10),
+    "All of your Pokémon that have any {M} Energy attached take 20 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).":
+        DecreaseOpponentAttackDamageOnEnergiesAttachedPassiveAbility("metal", 20),
+    "All of your Pokémon that have {M} Energy attached have no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("metal"),
+    "All of your Pokémon that have {P} Energy attached have no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("psychic"),
+    "Apply Weakness for your opponent's Active Pokémon as ×4 instead.":
+        WeaknessStrengthModifierOnOpponentsActivePassiveAbility(4),
+    "As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type.":
+        ChangePokemonEnergyTypeIfToolAttachedPassiveAbility(["fighting", "metal"], "Future Booster Energy Capsule"),
+    "As long as this Pokémon is in play, it is {G} and {R} type.":
+        ChangePokemonEnergyTypePassiveAbility(["grass", "fire"]),
+    "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.":
+        BasicPokemonInPlayHaveNoAbilities("mischievous lock"),
+    "As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)":
+        PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture(),
+    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.":
+        IncreaseOpponentAttackCostPassiveAbility(["colorless", 1]),
+    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do 20 less damage (before applying Weakness and Resistance).":
+        DecreaseOpponentAttackDamageIfActivePassiveAbility(20),
+    "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more.":
+        IncreaseOpponentAttackCostOfBasicPokemonPassiveAbility(["colorless", 1]),
+    "As long as this Pokémon is in the Active Spot, it can evolve during your first turn or the turn you play it.":
+        PokemonCanEvolveImmediatelyPassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, prevent all damage done to your Benched Pokémon by attacks from your opponent's Pokémon.":
+        MitigateAllBenchDamagePassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup.":
+        AddDamageToPoisonedPokemonTriggerAbility(5),
+    "As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon.":
+        HealWhenAttachingEnergyTriggerAbility(9),
+    "As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon.":
+        PreventAllEffectsOnSupportCardPlayedTriggerAbility(),
+    "As long as this Pokémon is in the Active Spot, your opponent can't have more than 3 Benched Pokémon. If they have 4 or more Benched Pokémon, they discard Benched Pokémon until they have 3 Pokémon on the Bench. If more than one effect changes the number of Benched Pokémon allowed, use the smaller number.": LimitNumberOfOpponentBenchedPokemonPassiveAbility(3),
+    "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards from their hand.":
+        OpponentCantPlayItemCardsPassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards or Pokémon Tool cards from their hand.":
+        OpponentCantPlayItemCardsOrToolsPassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, your opponent can't play any Pokémon that has an Ability from their hand, except for Team Rocket's Pokémon.":
+        CantPlayPokemonWithAbilityExceptForPassiveAbility("team rocket"),
+    "As long as this Pokémon is in the Active Spot, your opponent can't play any Stadium cards from their hand.":
+        OpponentCantPlayStadiumCardsPassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon can't retreat.":
+        OpponentsActivePokemonCantRetreatPassiveAbility(),
+    "As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon has no Abilities, except for Midnight Fluttering.":
+        OpponentsActivePokemonHaveNoAbilitiesPassiveAbility("midnight fluttering"),
+    "As long as this Pokémon is in the Active Spot, your opponent's Pokémon in play that have any damage counters on them have no Abilities, except for Pokémon ex.":
+        PokemonWithDamageHaveNoAbilitiesPassiveAbility("ex"),
+    "As long as this Pokémon is on your Bench, Benched Stage 2 Pokémon (both yours and your opponent's) have no Abilities.":
+        BenchedStageTwoPokemonHaveNoAbilitiesPassiveAbility(),
+    "As long as this Pokémon is on your Bench, all of your Steven's Pokémon take 30 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Stone Palace doesn't stack.":
+        DecreaseOpponentAttackDamageIfOnBenchPassiveAbility(30, "steven"),
+    "As long as this Pokémon is on your Bench, attacks used by your Marowak do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, "marowak"),
+    "As long as this Pokémon is on your Bench, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.":
+        MitigateAllDamageToPokemonPassiveAbility(),
+    "As long as this Pokémon is on your Bench, prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon.":
+        MitigateAllDamageAndEffectsToPokemonPassiveAbility(),
+    "As long as this Pokémon is on your Bench, your Active Pokémon's Retreat Cost is {C}{C} less.":
+        DecreaseRetreatCostIfOnBenchPassiveAbility(2, "colorless"),
+    "As long as you have at least 1 other Bouffalant in play, all of your Basic {C} Pokémon take 60 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Curly Wall doesn't stack.":
+        DecreaseOpponentAttackDamageOnBasicPokemonIfPokemonInPlayPassiveAbility(60, "bouffalant"),
+    "As often as you like during your turn, you may attach a Basic {L} Energy card from your hand to 1 of your Iono's Pokémon.":
+        AttachEnergyFromHandActiveAbility("lightning", 1, "iono"),
+    "As often as you like during your turn, you may attach a Basic {P} Energy card from your discard pile to 1 of your {P} Pokémon. If you attached Energy to a Pokémon in this way, put 2 damage counters on that Pokémon. You can't use this Ability on a Pokémon that would be Knocked Out.":
+        AttachEnergyFromDiscardPileWithDamageActiveAbility("psychic", 1, 2),
+    "As often as you like during your turn, you may attach a Basic {R} Energy card from your hand to 1 of your Pokémon.":
+        AttachEnergyFromHandActiveAbility("fire", 1),
+    "As often as you like during your turn, you may attach a Basic {W} Energy card from your hand to 1 of your Pokémon.":
+        AttachEnergyFromHandActiveAbility("water", 1),
+    "As often as you like during your turn, you may move 1 damage counter from 1 of your Team Rocket's Pokémon to another of your Pokémon.":
+        MoveDamageCounterToPokemonActiveAbility(1, "Team Rocket"),
+    "As often as you like during your turn, you may move 1 damage counter from 1 of your other Pokémon to this Pokémon.":
+        GetDamageCounterFromPokemonActiveAbility(1),
+    "As often as you like during your turn, you may move a {R} Energy from 1 of your Benched Pokémon to your Active Pokémon.":
+        MoveEnergyFromBenchToActiveActiveAbility("fire", 1),
+    "Attacks used by this Pokémon cost {C} less for each Kofu card in your discard pile.":
+        AttacksCostLessForCardInDiscardPilePassiveAbility("colorless", 1, "kofu"),
+    "Attacks used by this Pokémon cost {C} less for each of your opponent's Benched Pokémon.":
+        AttacksCostLessForEachOpponentBenchedPokemonPassiveAbility("colorless", 1),
     "Attacks used by this Pokémon do 50 more damage to your opponent's Active Pokémon that has an Ability (before applying Weakness and Resistance).": ['Compound Eyes'],
     "Attacks used by your Cynthia's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Cheer On to Glory'],
     "Attacks used by your Evolution {R} Pokémon do 10 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Victory Cheer'],
