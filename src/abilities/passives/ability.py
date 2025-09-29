@@ -4,30 +4,46 @@ from src.core.player import Player
 
 
 class BasicPokemonInPlayHaveNoAbilities(PassiveAbility):
-    names: list[str] = ["Mischievous Lock"]
+    names: list[str] = ["Mischievous Lock", "Fettered in Misfortune"]
     descriptions: list[str] = [
-        "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock."]
+        "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.",
+        "Basic Pokémon V in play (both yours and your opponent's) have no Abilities."]
 
-    def __init__(self, pokemon_restriction: str) -> None:
+    def __init__(self, pokemon_exception: str = None, pokemon_restriction: str = None,
+                 must_be_active: bool = False) -> None:
+        self.pokemon_exception = pokemon_exception
         self.pokemon_restriction = pokemon_restriction
+        self.must_be_active = must_be_active
 
     def can_activate(self, player: Player, ability_owner: PokemonCard):
-        if ability_owner != player.pokemon[0]:
+        if self.must_be_active and ability_owner != player.pokemon[0]:
             return False
 
-        for poke in player.pokemon:
-            if poke.pokemon_category == "basic":
-                return True
+        if self.pokemon_restriction == "v":
+            for poke in player.pokemon:
+                if poke.pokemon_category == "basic" and poke.suffix == "v":
+                    return True
 
-        for poke in player.opponent.pokemon:
-            if poke.pokemon_category == "basic":
-                return True
+            for poke in player.opponent.pokemon:
+                if poke.pokemon_category == "basic" and poke.suffix == "v":
+                    return True
+        else:
+            for poke in player.pokemon:
+                if poke.pokemon_category == "basic":
+                    return True
+
+            for poke in player.opponent.pokemon:
+                if poke.pokemon_category == "basic":
+                    return True
 
         return False
 
     def activate(self, player: Player, ability_owner: PokemonCard):
-        return {f'basic_pokemon_no_abilities_except_{self.pokemon_restriction}': True} if self.can_activate(player,
-                                                                                                            ability_owner) else {}
+        if self.pokemon_exception:
+            return {f'basic_pokemon_no_abilities_except_{self.pokemon_exception}': True} if self.can_activate(player,
+                                                                                                              ability_owner) else {}
+        else:
+            return {f"basic_pokemon_v_no_abilities": True} if self.can_activate(player, ability_owner) else {}
 
 
 class PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture(PassiveAbility):

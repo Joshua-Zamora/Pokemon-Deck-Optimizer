@@ -1,3 +1,4 @@
+from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility
 from src.abilities.actives.damage import *
 from src.abilities.actives.energy import *
 from src.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
@@ -34,7 +35,7 @@ abilities = {
     "As long as this Pokémon is in play, it is {G} and {R} type.":
         ChangePokemonEnergyTypePassiveAbility(["grass", "fire"]),
     "As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.":
-        BasicPokemonInPlayHaveNoAbilities("mischievous lock"),
+        BasicPokemonInPlayHaveNoAbilities(pokemon_exception="mischievous lock"),
     "As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)":
         PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture(),
     "As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.":
@@ -73,7 +74,7 @@ abilities = {
     "As long as this Pokémon is on your Bench, all of your Steven's Pokémon take 30 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Stone Palace doesn't stack.":
         DecreaseOpponentAttackDamageIfOnBenchPassiveAbility(30, "steven"),
     "As long as this Pokémon is on your Bench, attacks used by your Marowak do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
-        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, "marowak"),
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, pokemon_restriction="marowak"),
     "As long as this Pokémon is on your Bench, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.":
         MitigateAllDamageToPokemonPassiveAbility(),
     "As long as this Pokémon is on your Bench, prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon.":
@@ -100,17 +101,28 @@ abilities = {
         AttacksCostLessForCardInDiscardPilePassiveAbility("colorless", 1, "kofu"),
     "Attacks used by this Pokémon cost {C} less for each of your opponent's Benched Pokémon.":
         AttacksCostLessForEachOpponentBenchedPokemonPassiveAbility("colorless", 1),
-    "Attacks used by this Pokémon do 50 more damage to your opponent's Active Pokémon that has an Ability (before applying Weakness and Resistance).": ['Compound Eyes'],
-    "Attacks used by your Cynthia's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Cheer On to Glory'],
-    "Attacks used by your Evolution {R} Pokémon do 10 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Victory Cheer'],
-    "Attacks used by your Future Pokémon, except any Iron Crown ex, do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Cobalt Command'],
-    "Attacks used by your Hop's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance). The effect of Extra Helpings doesn't stack.": ['Extra Helpings'],
-    "Attacks used by your Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Regal Cheer'],
-    "Attacks used by your Pokémon do 30 more damage to your opponent's Active Evolution Pokémon (before applying Weakness and Resistance).": ['Primal Knowledge'],
-    "Attacks used by your {G} Pokémon and {R} Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Sunny Day'],
-    "Basic Pokémon V in play (both yours and your opponent's) have no Abilities.": ['Fettered in Misfortune'],
-    "Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken.": ['Seasoned Skill'],
-    "Cards in your opponent's discard pile can't be put into their hand by an effect of your opponent's Abilities or Trainer cards.": ['Slime Mold Colony'],
+    "Attacks used by this Pokémon do 50 more damage to your opponent's Active Pokémon that has an Ability (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageIfOpponentHasAbilityPassiveAbility(50),
+    "Attacks used by your Cynthia's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, pokemon_restriction="cynthia"),
+    "Attacks used by your Evolution {R} Pokémon do 10 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(10, ["fire"]),
+    "Attacks used by your Future Pokémon, except any Iron Crown ex, do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(20, pokemon_exception="iron crown"),
+    "Attacks used by your Hop's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance). The effect of Extra Helpings doesn't stack.":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, pokemon_restriction="hop", doesnt_stack=True),
+    "Attacks used by your Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(20),
+    "Attacks used by your Pokémon do 30 more damage to your opponent's Active Evolution Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(30, against_evolved=True),
+    "Attacks used by your {G} Pokémon and {R} Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreasePokemonAttackDamageForPokemonPassiveAbility(20, ["grass", "fire"]),
+    "Basic Pokémon V in play (both yours and your opponent's) have no Abilities.":
+        BasicPokemonInPlayHaveNoAbilities(pokemon_restriction="v"),
+    "Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken.":
+        AttackCostsLessForEachPrizeCardTakenPassiveAbility("colorless", 1, "blood-moon"),
+    "Cards in your opponent's discard pile can't be put into their hand by an effect of your opponent's Abilities or Trainer cards.":
+        OpponentCantGetCardsFromDiscardPilePassiveAbility(),
     "Damage from attacks used by this Pokémon isn't affected by any effects on your opponent's Active Pokémon.": ['Azure Seas'],
     "During Pokémon Checkup, heal 20 damage from each of your Pokémon.": ['Blessed Salt'],
     "During Pokémon Checkup, if this Pokémon is in the Active Spot, put 1 damage counter on your opponent's Active Pokémon.": ['Forest Miasma'],

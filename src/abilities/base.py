@@ -13,7 +13,7 @@ class Ability(ABC):
     descriptions: list[str] = []
 
 
-class ActiveAbility(Ability, ABC):
+class ActiveAbility(Ability):
     def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:
         pass
 
@@ -21,7 +21,7 @@ class ActiveAbility(Ability, ABC):
         pass
 
 
-class PassiveAbility(Ability, ABC):
+class PassiveAbility(Ability):
     """Always-on effects; no activation, but apply via hooks in game loop."""
 
     def apply(self, player: Player, owner: PokemonCard, context: dict):
@@ -33,7 +33,7 @@ class PassiveAbility(Ability, ABC):
         pass
 
 
-class TriggerAbility(Ability, ABC):
+class TriggerAbility(Ability):
     """Event-based; no manual activation."""
 
     def trigger_event(self) -> str:  # e.g., 'on_ko', 'on_damage', 'end_turn'

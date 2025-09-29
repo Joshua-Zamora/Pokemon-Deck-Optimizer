@@ -68,3 +68,15 @@ class CantPlayPokemonWithAbilityExceptForPassiveAbility(PassiveAbility):
     def get_modifiers(self, player: Player, ability_owner: PokemonCard):
         return {"opponent_play_pokemon_with_ability_restriction": self.pokemon_restriction} if self.can_activate(player,
                                                                                                                  ability_owner) else {}
+
+
+class OpponentCantGetCardsFromDiscardPilePassiveAbility(PassiveAbility):
+    names: list[str] = ["Slime Mold Colony"]
+    descriptions: list[str] = [
+        "Cards in your opponent's discard pile can't be put into their hand by an effect of your opponent's Abilities or Trainer cards."]
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
+        return True
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard):
+        return {"opponent_cant_get_card_from_discard_pile": True} if self.can_activate(player, ability_owner) else {}

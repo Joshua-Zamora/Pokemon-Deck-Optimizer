@@ -151,3 +151,19 @@ class AttacksCostLessForEachOpponentBenchedPokemonPassiveAbility(PassiveAbility)
         return {
             f"attack_cost_of_this_card_is_{self.energy_type}_less_for_each_opponent_benched": self.amount} if self.can_activate(
             player) else {}
+
+
+class AttackCostsLessForEachPrizeCardTakenPassiveAbility(PassiveAbility):
+    names: list[str] = ["Seasoned Skill"]
+    descriptions: list[str] = ["Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken."]
+
+    def __init__(self, energy_type: str, amount: int, attack: str):
+        self.energy_type = energy_type
+        self.amount = amount
+        self.attack = attack
+
+    def can_activate(self, player: Player) -> bool:
+        return len(player.prize_cards) < 6
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {f"attack_{self.attack}_cost_less": self.amount} if self.can_activate(player) else {}
