@@ -15,6 +15,7 @@ class PokemonCard(Card):
         "paralyzed": False,
         "poisoned": False,
     }
+    prevent_damage: bool = False
 
     def __init__(self, name: str, card_id: str, regulation_mark: str, energy_type: str, pokemon_category: str,
                  health_points: int, stage: int, evolves_from: str, attacks: list,

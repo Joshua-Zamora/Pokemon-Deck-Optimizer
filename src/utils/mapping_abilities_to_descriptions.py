@@ -1,4 +1,12 @@
-from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility
+from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility, \
+    PokemonMayUseAttackTwicePassiveAbility
+from abilities.passives.evolution import PokemonCanUseAttacksFromPastEvolutionsPassiveAbility
+from abilities.triggers.damage import HealDuringPokemonCheckupTriggerAbility, \
+    ApplyDamageDuringPokemonCheckupTriggerAbility, ApplyDamageToBasicPokemonDuringPokemonCheckupTriggerAbility, \
+    ApplyDamageToPokemonWithAbilityDuringPokemonCheckupTriggerAbility, \
+    ApplyDamageToBurnedPokemonDuringPokemonCheckupTriggerAbility, PreventDamageOnAttackedTriggerAbility, \
+    PreventDamageIfSameEnergyAsOpponentTriggerAbility
+from abilities.triggers.energy import MaySwitchOnEnergyAttachedTriggerAbility
 from src.abilities.actives.damage import *
 from src.abilities.actives.energy import *
 from src.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
@@ -123,18 +131,30 @@ abilities = {
         AttackCostsLessForEachPrizeCardTakenPassiveAbility("colorless", 1, "blood-moon"),
     "Cards in your opponent's discard pile can't be put into their hand by an effect of your opponent's Abilities or Trainer cards.":
         OpponentCantGetCardsFromDiscardPilePassiveAbility(),
-    "Damage from attacks used by this Pokémon isn't affected by any effects on your opponent's Active Pokémon.": ['Azure Seas'],
-    "During Pokémon Checkup, heal 20 damage from each of your Pokémon.": ['Blessed Salt'],
-    "During Pokémon Checkup, if this Pokémon is in the Active Spot, put 1 damage counter on your opponent's Active Pokémon.": ['Forest Miasma'],
-    "During Pokémon Checkup, if this Pokémon is in the Active Spot, put 2 damage counters on each of your opponent's Basic Pokémon.": ['Sand Stream'],
-    "During Pokémon Checkup, put 1 damage counter on each Pokémon that has an Ability (both yours and your opponent's), except any Froslass.": ['Freezing Shroud'],
-    "During Pokémon Checkup, put 3 more damage counters on your opponent's Burned Pokémon.": ['Magma Surge'],
-    "During your turn, if this Pokémon is on your Bench, whenever you attach an Energy card from your hand to this Pokémon, you may switch it with your Active Pokémon.": ['Far-Flying Meteor'],
-    "Each of your evolved Pokémon can use any attack from its previous Evolutions. (You still need the necessary Energy to use each attack.)": ['Memory Dive'],
-    "If Festival Grounds is in play, this Pokémon may use an attack it has twice. If the first attack Knocks Out your opponent's Active Pokémon, you may attack again after your opponent chooses a new Active Pokémon.": ['Festival Lead'],
-    "If any damage is done to this Pokémon by attacks, flip a coin. If heads, prevent that damage.": ['Expert Hider', 'Drifting Dodge'],
-    "If this Pokémon and your opponent's Active Pokémon have the same amount of Energy attached, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.": ['Mimic Barrier'],
-    "If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Lose Cool'],
+    "Damage from attacks used by this Pokémon isn't affected by any effects on your opponent's Active Pokémon.":
+        OpponentEffectsNegatedFromAttackDamagePassiveAbility(),
+    "During Pokémon Checkup, heal 20 damage from each of your Pokémon.":
+        HealDuringPokemonCheckupTriggerAbility(2),
+    "During Pokémon Checkup, if this Pokémon is in the Active Spot, put 1 damage counter on your opponent's Active Pokémon.":
+        ApplyDamageDuringPokemonCheckupTriggerAbility(1),
+    "During Pokémon Checkup, if this Pokémon is in the Active Spot, put 2 damage counters on each of your opponent's Basic Pokémon.":
+        ApplyDamageToBasicPokemonDuringPokemonCheckupTriggerAbility(2),
+    "During Pokémon Checkup, put 1 damage counter on each Pokémon that has an Ability (both yours and your opponent's), except any Froslass.":
+        ApplyDamageToPokemonWithAbilityDuringPokemonCheckupTriggerAbility(1, "froslass"),
+    "During Pokémon Checkup, put 3 more damage counters on your opponent's Burned Pokémon.":
+        ApplyDamageToBurnedPokemonDuringPokemonCheckupTriggerAbility(3),
+    "During your turn, if this Pokémon is on your Bench, whenever you attach an Energy card from your hand to this Pokémon, you may switch it with your Active Pokémon.":
+        MaySwitchOnEnergyAttachedTriggerAbility(),
+    "Each of your evolved Pokémon can use any attack from its previous Evolutions. (You still need the necessary Energy to use each attack.)":
+        PokemonCanUseAttacksFromPastEvolutionsPassiveAbility(),
+    "If Festival Grounds is in play, this Pokémon may use an attack it has twice. If the first attack Knocks Out your opponent's Active Pokémon, you may attack again after your opponent chooses a new Active Pokémon.":
+        PokemonMayUseAttackTwicePassiveAbility(),
+    "If any damage is done to this Pokémon by attacks, flip a coin. If heads, prevent that damage.":
+        PreventDamageOnAttackedTriggerAbility(),
+    "If this Pokémon and your opponent's Active Pokémon have the same amount of Energy attached, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.":
+        PreventDamageIfSameEnergyAsOpponentTriggerAbility(),
+    "If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreaseDamageOnNumDamageCountersAttachedPassiveAbility(2, 120),
     "If this Pokémon has 3 or more {M} Energy attached, it gets +100 HP.": ['Nutritional Iron'],
     "If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand.": ['ACE Nullifier'],
     "If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance).": ['Rock Armor'],

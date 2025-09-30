@@ -147,6 +147,22 @@ class IncreasePokemonAttackDamageIfOpponentHasAbilityPassiveAbility(PassiveAbili
         return {"increase_damage_if_opponent_has_ability": self.amount} if self.can_activate(player) else {}
 
 
+class IncreaseDamageOnNumDamageCountersAttachedPassiveAbility(PassiveAbility):
+    names: list[str] = ["Lose Cool"]
+    descriptions: list[str] = [
+        "If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance)."]
+
+    def __init__(self, damage_counters: int, amount: int):
+        self.damage_counters = damage_counters
+        self.amount = amount
+
+    def can_activate(self, player: Player) -> bool:
+        return player.pokemon[0].damage_counters_attached >= self.damage_counters
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"increase_damage": self.amount} if self.can_activate(player) else {}
+
+
 class IncreasePokemonAttackDamageForPokemonPassiveAbility(PassiveAbility):
     names: list[str] = ["Cheer On to Glory", "Cobalt Command", "Victory Cheer", "Cheering Bone", "Extra Helpings",
                         "Regal Cheer", "Primal Knowledge", "Sunny Day"]
@@ -217,3 +233,15 @@ class IncreasePokemonAttackDamageForPokemonPassiveAbility(PassiveAbility):
                                                                                                           ability_owner) else {}
         else:
             return {"increase_pokemon_damage": self.amount} if self.can_activate(player, ability_owner) else {}
+
+
+class OpponentEffectsNegatedFromAttackDamagePassiveAbility(PassiveAbility):
+    names: str = ["Azure Seas"]
+    descriptions: str = [
+        "Damage from attacks used by this Pokémon isn't affected by any effects on your opponent's Active Pokémon."]
+
+    def can_activate(self) -> bool:
+        return True
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"negate_effects_to_attacks": True} if self.can_activate() else {}

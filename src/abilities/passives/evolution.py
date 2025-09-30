@@ -13,3 +13,15 @@ class PokemonCanEvolveImmediatelyPassiveAbility(PassiveAbility):
 
     def activate(self, player: Player, ability_owner: PokemonCard):
         return {"can_evolve_immediately": True} if self.can_activate(player, ability_owner) else {}
+
+
+class PokemonCanUseAttacksFromPastEvolutionsPassiveAbility(PassiveAbility):
+    names: list[str] = ["Memory Dive"]
+    descriptions: list[str] = [
+        "Each of your evolved Pokémon can use any attack from its previous Evolutions. (You still need the necessary Energy to use each attack.)"]
+
+    def can_activate(self) -> bool:
+        return True
+
+    def activate(self):
+        return {"use_past_evolutions": True} if self.can_activate() else {}

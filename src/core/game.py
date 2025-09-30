@@ -1,4 +1,6 @@
 import random
+
+from cards.trainer_card import TrainerCard
 from player import Player
 
 
@@ -8,6 +10,7 @@ class Game:
     in_pokemon_checkup: bool = False
     all_abilities: dict = {}
     all_attacks: dict = {}
+    stadium_in_play: TrainerCard = None
 
     def __init__(self, player_one: Player, player_two: Player):
         self.player_one = player_one

@@ -1,3 +1,4 @@
+from core.game import Game
 from src.abilities.base import PassiveAbility
 from src.cards.pokemon_card import PokemonCard
 from src.core.player import Player
@@ -80,3 +81,15 @@ class OpponentCantGetCardsFromDiscardPilePassiveAbility(PassiveAbility):
 
     def get_modifiers(self, player: Player, ability_owner: PokemonCard):
         return {"opponent_cant_get_card_from_discard_pile": True} if self.can_activate(player, ability_owner) else {}
+
+
+class PokemonMayUseAttackTwicePassiveAbility(PassiveAbility):
+    names: list[str] = ["Festival Lead'"]
+    descriptions: list[str] = [
+        "If Festival Grounds is in play, this Pokémon may use an attack it has twice. If the first attack Knocks Out your opponent's Active Pokémon, you may attack again after your opponent chooses a new Active Pokémon."]
+
+    def can_activate(self, game_state: Game) -> bool:
+        return game_state.stadium_in_play.name == "Festival Grounds"
+
+    def activate(self, game_state: Game):
+        return {"may_attack_twice": True} if self.can_activate(game_state) else {}
