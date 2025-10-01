@@ -1,12 +1,15 @@
 from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility, \
-    PokemonMayUseAttackTwicePassiveAbility
+    PokemonMayUseAttackTwicePassiveAbility, OpponentCantPlayAceSpecCardsIfToolAttachedPassiveAbility
 from abilities.passives.evolution import PokemonCanUseAttacksFromPastEvolutionsPassiveAbility
+from abilities.triggers.affliction import FlipExtraCoinIfAsleepTriggerAbility
+from abilities.triggers.board import TakeOneFewerPrizeCardOnKnockoutTriggerAbility
 from abilities.triggers.damage import HealDuringPokemonCheckupTriggerAbility, \
     ApplyDamageDuringPokemonCheckupTriggerAbility, ApplyDamageToBasicPokemonDuringPokemonCheckupTriggerAbility, \
     ApplyDamageToPokemonWithAbilityDuringPokemonCheckupTriggerAbility, \
     ApplyDamageToBurnedPokemonDuringPokemonCheckupTriggerAbility, PreventDamageOnAttackedTriggerAbility, \
     PreventDamageIfSameEnergyAsOpponentTriggerAbility
 from abilities.triggers.energy import MaySwitchOnEnergyAttachedTriggerAbility
+from abilities.triggers.health import PreventKnockOutTriggerAbility
 from src.abilities.actives.damage import *
 from src.abilities.actives.energy import *
 from src.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
@@ -155,22 +158,38 @@ abilities = {
         PreventDamageIfSameEnergyAsOpponentTriggerAbility(),
     "If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
         IncreaseDamageOnNumDamageCountersAttachedPassiveAbility(2, 120),
-    "If this Pokémon has 3 or more {M} Energy attached, it gets +100 HP.": ['Nutritional Iron'],
-    "If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand.": ['ACE Nullifier'],
-    "If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance).": ['Rock Armor'],
-    "If this Pokémon has any Special Energy attached, it gets +100 HP.": ['Expanding Body'],
-    "If this Pokémon has any {D} Energy attached and is damaged by an attack, flip a coin. If heads, prevent that damage.": ['Adrena-Pheromone'],
-    "If this Pokémon has any {D} Energy attached, it gets +100 HP, and the attacks it uses do 100 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).": ['Adrena-Power'],
-    "If this Pokémon has any {L} Energy attached, it has no Retreat Cost.": ['Voltaic Float'],
-    "If this Pokémon has any {P} Energy attached, it has no Retreat Cost.": ['Mist Float'],
-    "If this Pokémon has any {R} Energy attached, it has no Retreat Cost.": ['Flare Float'],
-    "If this Pokémon has any {W} Energy attached, it has no Retreat Cost.": ['Ice Float'],
-    "If this Pokémon has full HP and would be Knocked Out by damage from an attack, it is not Knocked Out, and its remaining HP becomes 10.": ['Resolute Heart', 'Sturdy'],
-    "If this Pokémon has full HP, it takes 80 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).": ['Crimson Armor'],
-    "If this Pokémon has no Energy attached, it has no Retreat Cost.": ['Melt Away', 'In a Hungry Hurry'],
-    "If this Pokémon is Asleep, flip 2 coins instead of 1 during Pokémon Checkup. If either of them is tails, this Pokémon is still Asleep.": ['Stir and Snooze'],
-    "If this Pokémon is Confused and is damaged by an attack, flip a coin. If heads, prevent that damage.": ['Tangled Feet'],
-    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, and if you have any Pecharunt ex in play, your opponent takes 1 fewer Prize card.": ["Oh No You Don't"],
+    "If this Pokémon has 3 or more {M} Energy attached, it gets +100 HP.":
+        IncreaseHealthIfEnergyAttachedPassiveAbility("metal", 3, 100),
+    "If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand.":
+        OpponentCantPlayAceSpecCardsIfToolAttachedPassiveAbility(),
+    "If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance).":
+        IncreaseDamageResistanceIfAnyEnergyAttachedPassiveAbility(30),
+    "If this Pokémon has any Special Energy attached, it gets +100 HP.":
+        IncreaseHealthIfEnergyAttachedPassiveAbility("special", 1, 100),
+    "If this Pokémon has any {D} Energy attached and is damaged by an attack, flip a coin. If heads, prevent that damage.":
+        PreventDamageOnAttackedTriggerAbility("darkness"),
+    "If this Pokémon has any {D} Energy attached, it gets +100 HP, and the attacks it uses do 100 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).":
+        IncreaseHealthIfEnergyAttachedPassiveAbility("darkness", 1, 100, 100),
+    "If this Pokémon has any {L} Energy attached, it has no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("lightning", True),
+    "If this Pokémon has any {P} Energy attached, it has no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("psychic", True),
+    "If this Pokémon has any {R} Energy attached, it has no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("fire", True),
+    "If this Pokémon has any {W} Energy attached, it has no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("water", True),
+    "If this Pokémon has full HP and would be Knocked Out by damage from an attack, it is not Knocked Out, and its remaining HP becomes 10.":
+        PreventKnockOutTriggerAbility(10),
+    "If this Pokémon has full HP, it takes 80 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).":
+        DecreaseOpponentAttackDamageIfFullHPPassiveAbility(80),
+    "If this Pokémon has no Energy attached, it has no Retreat Cost.":
+        NoRetreatCostForEnergyTypePokemonPassiveAbility("none", True),
+    "If this Pokémon is Asleep, flip 2 coins instead of 1 during Pokémon Checkup. If either of them is tails, this Pokémon is still Asleep.":
+        FlipExtraCoinIfAsleepTriggerAbility(),
+    "If this Pokémon is Confused and is damaged by an attack, flip a coin. If heads, prevent that damage.":
+        PreventDamageOnAttackedTriggerAbility(affliction="confused"),
+    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, and if you have any Pecharunt ex in play, your opponent takes 1 fewer Prize card.":
+        TakeOneFewerPrizeCardOnKnockoutTriggerAbility("pecharunt ex"),
     "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, discard 2 random cards from your opponent's hand.": ['Startling Pumpkin'],
     "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, search your deck for a card and put it into your hand. Then, shuffle your deck.": ['Gold Coffin'],
     "If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon.": ['Pummeling Payback'],

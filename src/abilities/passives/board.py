@@ -93,3 +93,15 @@ class PokemonMayUseAttackTwicePassiveAbility(PassiveAbility):
 
     def activate(self, game_state: Game):
         return {"may_attack_twice": True} if self.can_activate(game_state) else {}
+
+
+class OpponentCantPlayAceSpecCardsIfToolAttachedPassiveAbility(PassiveAbility):
+    names: list[str] = ["ACE Nullifier"]
+    descriptions: list[str] = [
+        "If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand."]
+
+    def can_activate(self, ability_owner: PokemonCard) -> bool:
+        return ability_owner.pokemon_tool_attached is not None
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"opponent_no_ace_spec_cards": True} if self.can_activate(ability_owner) else {}

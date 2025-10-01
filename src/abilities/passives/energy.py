@@ -49,23 +49,42 @@ class ChangePokemonEnergyTypePassiveAbility(PassiveAbility):
 
 
 class NoRetreatCostForEnergyTypePokemonPassiveAbility(PassiveAbility):
-    names: list[str] = ["Metal Bridge", "Lunar Zone"]
+    names: list[str] = ["Metal Bridge", "Lunar Zone", "Voltaic Float", "Mist Float", "Flare Float", "Ice Float",
+                        "Melt Away", "In a Hungry Hurry"]
     descriptions: list[str] = ["All of your Pokémon that have {M} Energy attached have no Retreat Cost.",
-                               "All of your Pokémon that have {P} Energy attached have no Retreat Cost."]
+                               "All of your Pokémon that have {P} Energy attached have no Retreat Cost.",
+                               "If this Pokémon has any {L} Energy attached, it has no Retreat Cost.",
+                               "If this Pokémon has any {P} Energy attached, it has no Retreat Cost.",
+                               "If this Pokémon has any {R} Energy attached, it has no Retreat Cost.",
+                               "If this Pokémon has any {W} Energy attached, it has no Retreat Cost.",
+                               "If this Pokémon has no Energy attached, it has no Retreat Cost."]
 
-    def __init__(self, energy_type: str):
+    def __init__(self, energy_type: str, this_pokemon_only: bool = False):
         self.energy_type = energy_type
+        self.this_pokemon_only = this_pokemon_only
 
-    def can_activate(self, player: Player):
-        for poke in player.pokemon:
-            for energy in poke.energy_cards_attached:
-                if energy.energy_type == self.energy_type:
-                    return True
+    def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
+        if self.this_pokemon_only:
+            if self.energy_type == "none":
+                return len(ability_owner.energy_cards_attached) == 0
+            else:
+                for energy in ability_owner.energy_cards_attached:
+                    if energy.energy_type == self.energy_type:
+                        return True
+        else:
+            for poke in player.pokemon:
+                for energy in poke.energy_cards_attached:
+                    if energy.energy_type == self.energy_type:
+                        return True
 
         return False
 
     def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
-        return {f"retreat_cost_for_pokemon_with_{self.energy_type}_attached": 0} if self.can_activate(player) else {}
+        if self.this_pokemon_only:
+            return {"retreat_cost": 0} if self.can_activate(player, ability_owner) else {}
+        else:
+            return {f"retreat_cost_for_pokemon_with_{self.energy_type}_attached": 0} if self.can_activate(player,
+                                                                                                          ability_owner) else {}
 
 
 class DecreaseRetreatCostIfOnBenchPassiveAbility(PassiveAbility):
@@ -155,7 +174,8 @@ class AttacksCostLessForEachOpponentBenchedPokemonPassiveAbility(PassiveAbility)
 
 class AttackCostsLessForEachPrizeCardTakenPassiveAbility(PassiveAbility):
     names: list[str] = ["Seasoned Skill"]
-    descriptions: list[str] = ["Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken."]
+    descriptions: list[str] = [
+        "Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken."]
 
     def __init__(self, energy_type: str, amount: int, attack: str):
         self.energy_type = energy_type

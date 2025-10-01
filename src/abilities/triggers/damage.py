@@ -6,38 +6,6 @@ from src.cards.pokemon_card import PokemonCard
 from src.core.player import Player
 
 
-class HealWhenAttachingEnergyTriggerAbility(TriggerAbility):
-    names: list[str] = ["Auto Heal"]
-    descriptions: list[str] = [
-        "As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon."]
-
-    def __init__(self, damage_counters: int):
-        self.damage_counters = damage_counters
-
-    def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
-        return ability_owner == player.pokemon[0]
-
-    def activate(self, player: Player, ability_owner: PokemonCard, target_pokemon: PokemonCard):
-        if self.can_activate(player, ability_owner):
-            target_pokemon.damage_counters_attached -= self.damage_counters
-
-
-class HealDuringPokemonCheckupTriggerAbility(TriggerAbility):
-    names: list[str] = ["Blessed Salt"]
-    descriptions: list[str] = ["During Pokémon Checkup, heal 20 damage from each of your Pokémon."]
-
-    def __init__(self, damage_counters: int):
-        self.damage_counters = damage_counters
-
-    def can_activate(self, game_state: Game) -> bool:
-        return game_state.in_pokemon_checkup
-
-    def activate(self, game_state: Game, player: Player):
-        if self.can_activate(game_state):
-            for poke in player.pokemon:
-                poke.damage_counters_attached -= self.damage_counters
-
-
 class ApplyDamageDuringPokemonCheckupTriggerAbility(TriggerAbility):
     names: list[str] = ["Forest Miasma"]
     descriptions: list[str] = [
@@ -111,17 +79,32 @@ class ApplyDamageToBurnedPokemonDuringPokemonCheckupTriggerAbility(TriggerAbilit
 
 
 class PreventDamageOnAttackedTriggerAbility(TriggerAbility):
-    names: list[str] = ["Expert Hider", "Drifting Dodge"]
+    names: list[str] = ["Expert Hider", "Drifting Dodge", "Adrena-Pheromone", "Tangled Feet"]
     descriptions: list[str] = [
-        "If any damage is done to this Pokémon by attacks, flip a coin. If heads, prevent that damage."]
+        "If any damage is done to this Pokémon by attacks, flip a coin. If heads, prevent that damage.",
+        "If this Pokémon has any {D} Energy attached and is damaged by an attack, flip a coin. If heads, prevent that damage.",
+        "If this Pokémon is Confused and is damaged by an attack, flip a coin. If heads, prevent that damage."]
     damaged: bool = False
 
-    def can_activate(self) -> bool:
+    def __init__(self, energy_type: str = None, affliction: str = None):
+        self.energy_type = energy_type
+        self.affliction = affliction
+
+    def can_activate(self, ability_owner: PokemonCard) -> bool:
+        if self.energy_type:
+            for energy in ability_owner.energy_cards_attached:
+                if energy.energy_type == self.energy_type:
+                    return self.damaged
+
+            return False
+        elif self.affliction:
+            return ability_owner.afflictions[self.affliction] and self.damaged
+
         return self.damaged
 
-    def activate(self, player: Player):
-        if self.can_activate() and random.choice([True, False]):
-            player.pokemon[0].prevent_damage = True
+    def activate(self, ability_owner: PokemonCard):
+        if self.can_activate(ability_owner) and random.choice([True, False]):
+            ability_owner.prevent_damage = True
 
 
 class PreventDamageIfSameEnergyAsOpponentTriggerAbility(TriggerAbility):

@@ -94,6 +94,36 @@ class DecreaseOpponentAttackDamageOnBasicPokemonIfPokemonInPlayPassiveAbility(Pa
             player) else {}
 
 
+class DecreaseOpponentAttackDamageIfFullHPPassiveAbility(PassiveAbility):
+    names: list[str] = ["Crimson Armor'"]
+    descriptions: list[str] = [
+        "If this Pokémon has full HP, it takes 80 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance)."]
+
+    def __init__(self, amount: int):
+        self.amount = amount
+
+    def can_activate(self, ability_owner: PokemonCard) -> bool:
+        return ability_owner.damage_counters_attached == 0
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"opponent_damage": -self.amount} if self.can_activate(ability_owner) else {}
+
+
+class IncreaseDamageResistanceIfAnyEnergyAttachedPassiveAbility(PassiveAbility):
+    names: list[str] = ["Rock Armor"]
+    descriptions: list[str] = [
+        "If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance)."]
+
+    def __init__(self, amount: int):
+        self.amount = amount
+
+    def can_activate(self, ability_owner: PokemonCard) -> bool:
+        return ability_owner.energy_cards_attached is not None and len(ability_owner.energy_cards_attached) > 0
+
+    def get_modifiers(self, player: Player, ability_owner: PokemonCard) -> dict:
+        return {"increase_damage_resistance": self.amount} if self.can_activate(ability_owner) else {}
+
+
 class MitigateAllBenchDamagePassiveAbility(PassiveAbility):
     names: list[str] = ["Adverse Weather"]
     descriptions: list[str] = [
