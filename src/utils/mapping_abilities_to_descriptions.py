@@ -2,12 +2,13 @@ from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveA
     PokemonMayUseAttackTwicePassiveAbility, OpponentCantPlayAceSpecCardsIfToolAttachedPassiveAbility
 from abilities.passives.evolution import PokemonCanUseAttacksFromPastEvolutionsPassiveAbility
 from abilities.triggers.affliction import FlipExtraCoinIfAsleepTriggerAbility
-from abilities.triggers.board import TakeOneFewerPrizeCardOnKnockoutTriggerAbility
+from abilities.triggers.board import TakeOneFewerPrizeCardOnKnockoutTriggerAbility, \
+    DiscardFromHandOnKnockoutTriggerAbility, SearchDeckForCardTriggerAbility, SearchDeckForCardOnKnockoutTriggerAbility
 from abilities.triggers.damage import HealDuringPokemonCheckupTriggerAbility, \
     ApplyDamageDuringPokemonCheckupTriggerAbility, ApplyDamageToBasicPokemonDuringPokemonCheckupTriggerAbility, \
     ApplyDamageToPokemonWithAbilityDuringPokemonCheckupTriggerAbility, \
     ApplyDamageToBurnedPokemonDuringPokemonCheckupTriggerAbility, PreventDamageOnAttackedTriggerAbility, \
-    PreventDamageIfSameEnergyAsOpponentTriggerAbility
+    PreventDamageIfSameEnergyAsOpponentTriggerAbility, DamageAttackingPokemonOnAttackedTriggerAbility
 from abilities.triggers.energy import MaySwitchOnEnergyAttachedTriggerAbility
 from abilities.triggers.health import PreventKnockOutTriggerAbility
 from src.abilities.actives.damage import *
@@ -190,9 +191,12 @@ abilities = {
         PreventDamageOnAttackedTriggerAbility(affliction="confused"),
     "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, and if you have any Pecharunt ex in play, your opponent takes 1 fewer Prize card.":
         TakeOneFewerPrizeCardOnKnockoutTriggerAbility("pecharunt ex"),
-    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, discard 2 random cards from your opponent's hand.": ['Startling Pumpkin'],
-    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, search your deck for a card and put it into your hand. Then, shuffle your deck.": ['Gold Coffin'],
-    "If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon.": ['Pummeling Payback'],
+    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, discard 2 random cards from your opponent's hand.":
+        DiscardFromHandOnKnockoutTriggerAbility(2),
+    "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, search your deck for a card and put it into your hand. Then, shuffle your deck.":
+        SearchDeckForCardOnKnockoutTriggerAbility(),
+    "If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon.":
+        DamageAttackingPokemonOnAttackedTriggerAbility(2, "metal"),
     "If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, flip a coin. If heads, the Attacking Pokémon is Knocked Out.": ["Let's Have a Blast"],
     "If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, move up to 2 {W} Energy cards from this Pokémon to 1 of your Benched Pokémon.": ['Fillet Memento'],
     "If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, put 6 damage counters on the Attacking Pokémon.": ['Exploding Needles'],

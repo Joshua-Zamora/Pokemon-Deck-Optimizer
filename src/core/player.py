@@ -209,6 +209,15 @@ class Player:
                     self.opponent.pokemon[source].energy_cards_attached.pop(i))
                 break
 
+    def get_number_of_energy_on_pokemon(self, energy_type: str, card: PokemonCard):
+        count = 0
+
+        for energy in card.energy_cards_attached:
+            if energy.energy_type == energy_type:
+                count += 1
+
+        return count
+
     def remove_energy(self, source: str, energy_type: str, amount: int):
         pass
 

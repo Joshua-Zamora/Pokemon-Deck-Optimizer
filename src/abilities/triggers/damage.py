@@ -118,3 +118,22 @@ class PreventDamageIfSameEnergyAsOpponentTriggerAbility(TriggerAbility):
     def activate(self, player: Player):
         if self.can_activate(player):
             player.pokemon[0].prevent_damage = True
+
+
+class DamageAttackingPokemonOnAttackedTriggerAbility(TriggerAbility):
+    names: list[str] = ["Pummeling Payback"]
+    descriptions: list[str] = [
+        "If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon."]
+
+    def __init__(self, damage_counters: int, energy_type: str):
+        self.damage_counters = damage_counters
+        self.energy_type = energy_type
+
+    def can_activate(self, player: Player, ability_owner: PokemonCard) -> bool:
+        return player.get_number_of_energy_on_pokemon(self.energy_type, ability_owner)
+
+    def activate(self, player: Player, ability_owner: PokemonCard):
+        if self.can_activate(player, ability_owner):
+            for i in range(player.get_number_of_energy_on_pokemon(self.energy_type, ability_owner)):
+                player.opponent.pokemon[
+                    0].damage_counters_attached += self.damage_counters  # To do: May need to expand beyond active for determining attacking Pokemon
