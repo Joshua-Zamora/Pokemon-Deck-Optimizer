@@ -1,26 +1,33 @@
-import pickle
-from src.core.game import Game
-from src.core.tcg_card import Card
-from src.core.player import Player
-from src.core.deck_builder import DeckBuilder
+import flet as ft
 
 
-def main():
-    card_regulations_allowed = ["G", "H", "I"]
+def main(page: ft.Page):
+    page.title = "Pokemon Deck Builder"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    deck_builder = DeckBuilder(card_regulations_allowed,
-                               games_per_evaluation=20,
-                               population_size=50,
-                               generations=30,
-                               mutation_rate=0.1,
-                               crossover_rate=0.7,
-                               deck_size=60
-                               )
+    main_icon = ft.Icon(ft.Icons.FAVORITE, color=ft.Colors.PRIMARY, size=40)
+    spacing = ft.Container(height=40)
+    deck_builder_button = ft.Button(
+        ft.Text("Deck Builder", size=20),
+        width=180,
+        height=50,
+        on_click=None
+    )
+    play_button = ft.Button(
+        ft.Text("Play", size=20),
+        width=100,
+        height=50,
+        disabled=True,
+        on_click=None
+    )
+    statistics_button = ft.Button(
+        ft.Text("Statistics", size=20),
+        width=150,
+        height=50,
+        on_click=None
+    )
 
-    best_deck = deck_builder.optimize()
+    page.add(main_icon, spacing, deck_builder_button, play_button, statistics_button)
 
-    print(best_deck)
-
-
-if __name__ == "__main__":
-    main()
+ft.run(main)
