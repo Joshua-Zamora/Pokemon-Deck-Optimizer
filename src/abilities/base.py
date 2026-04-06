@@ -1,6 +1,6 @@
+from __future__ import annotations
 from abc import ABC, abstractmethod
-from src.cards.pokemon_card import PokemonCard
-from src.core.player import Player
+from src.cards.card import Card
 
 
 class Ability(ABC):
@@ -11,18 +11,18 @@ class Ability(ABC):
 
 class ActiveAbility(Ability, ABC):
     @abstractmethod
-    def can_activate(self, player: Player, source: int = 0, target: int = 1) -> bool:
+    def can_activate(self, player, source: int = 0, target: int = 1) -> bool:
         pass
 
     @abstractmethod
-    def activate(self, player: Player, source: int = 0, target: int = 1):
+    def activate(self, player, source: int = 0, target: int = 1):
         pass
 
 
 class PassiveAbility(Ability, ABC):
     """Always-on effects; no activation, but apply via hooks in game loop."""
 
-    def apply(self, player: Player, owner: PokemonCard, context: dict):
+    def apply(self, player, owner: Card, context: dict):
         """e.g., Context: {'damage_amount': 100, 'attacker': ...} for damage prevention."""
         pass
 

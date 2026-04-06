@@ -1,3 +1,4 @@
+from __future__ import annotations
 from src.cards.card import Card
 from src.cards.energy_card import EnergyCard
 from src.cards.trainer_card import TrainerCard

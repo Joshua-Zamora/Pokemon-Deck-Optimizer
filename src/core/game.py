@@ -1,5 +1,5 @@
 import random
-from player import Player
+from src.core.player import Player
 
 
 class Game:
