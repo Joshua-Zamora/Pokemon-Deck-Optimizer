@@ -9,8 +9,8 @@ if TYPE_CHECKING:
 
 
 class Ability(ABC):
-    names: list[str] = []
-    descriptions: list[str] = []
+    name: str
+    description: str
 
 
 class ActiveAbility(Ability):
@@ -30,11 +30,4 @@ class PassiveAbility(Ability):
 
     def get_modifiers(self, player: Player, owner: PokemonCard) -> dict:
         """Return modifiers as a dict, e.g., {'attack_cost_opponent': {'colorless': 1}}."""
-        pass
-
-
-class TriggerAbility(Ability):
-    """Event-based; no manual activation."""
-
-    def trigger_event(self) -> str:  # e.g., 'on_ko', 'on_damage', 'end_turn'
         pass

@@ -15,6 +15,10 @@ class Player:
     modifiers = {}
     recently_knocked_out_pokemon: PokemonCard = None
     supporter_effects_mitigated = False
+    is_first_turn = True
+    supporter_card_played = False
+    item_card_played = False
+    has_turn_ended = False
 
     def __init__(self, name, deck):
         self.name = name
@@ -55,6 +59,8 @@ class Player:
             self.hand.append(self.deck.pop(0))
 
     def attack(self, opponent, attack):
+        self.is_first_turn = False
+        self.has_turn_ended = True
         pass
 
     def set_prize_cards(self, num_cards: int = 6):

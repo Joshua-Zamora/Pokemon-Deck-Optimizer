@@ -1,4 +1,4 @@
-from src.abilities.base import ActiveAbility
+from cards.abilities.base import ActiveAbility
 from src.core.player import Player
 
 

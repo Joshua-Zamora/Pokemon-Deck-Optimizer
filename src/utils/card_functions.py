@@ -133,6 +133,50 @@ def print_card_info(card):
     pprint(card_dict, indent=4, width=80, sort_dicts=False)
 
 
+def list_all_teams(cards):
+    """
+    Prints every team that appears in your dataset (based on the 'name' field).
+    """
+    from collections import defaultdict
+
+    team_cards = defaultdict(list)
+
+    # These are all the common team prefixes used in the TCG
+    team_keywords = [
+        "Team Rocket", "Rocket's", "Giovanni's", "Team Star",
+        "Team Aqua", "Team Magma", "Team Plasma", "Team Galactic",
+        "Team Flare", "Team Skull", "Team Rainbow", "Team"
+    ]
+
+    print(f"🔍 Scanning {len(cards):,} cards for teams...\n")
+
+    for card in cards:
+        if not hasattr(card, 'name') or not card.name:
+            continue
+        name_lower = card.name.lower()
+
+        for keyword in team_keywords:
+            if keyword.lower() in name_lower:
+                team_cards[keyword].append(card.name)
+                break  # assign to the first matching team only
+
+    if not team_cards:
+        print("❌ No teams found in the dataset.")
+        return
+
+    print("✅ ALL TEAMS FOUND IN YOUR DATASET:\n")
+    print("=" * 60)
+
+    # Sort by number of cards (most common first)
+    for team, card_list in sorted(team_cards.items(), key=lambda x: -len(x[1])):
+        print(f"• {team:<18} → {len(card_list):,} cards")
+        # Show up to 6 example card names
+        examples = card_list[:6]
+        print("   Examples:", ", ".join(examples))
+        print("-" * 60)
+
+    print(f"\nTotal team-related cards: {sum(len(v) for v in team_cards.values())}")
+
 def get_card_pool_specifics(cards):
     num_abilities = 0
     abilities = {}
@@ -147,7 +191,7 @@ def get_card_pool_specifics(cards):
     count = 0
     max_num_weaknesses = 0
     max_num_resistances = 0
-
+    print(cards[0])
     for card in cards:
         if card.abilities:
             num_abilities += len(card.abilities)
@@ -374,5 +418,6 @@ if __name__ == "__main__":
     # print_card_info(all_legal_pokemon_cards[0])
     # asyncio.run(save_cards(file_name_cards, all_pokemon_cards))
     # sort_cards_into_pickle_files(all_legal_pokemon_cards)
-    get_card_pool_specifics(all_legal_pokemon_cards)
+    list_all_teams(all_legal_pokemon_cards)
+    # get_card_pool_specifics(all_legal_pokemon_cards)
     #to_dict(read_file_to_string("\\data\\attacks_sorted_by_activation.txt"))

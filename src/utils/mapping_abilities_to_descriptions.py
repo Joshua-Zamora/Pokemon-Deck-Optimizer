@@ -1,6 +1,6 @@
-from abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility, \
+from cards.abilities.passives.board import OpponentCantGetCardsFromDiscardPilePassiveAbility, \
     PokemonMayUseAttackTwicePassiveAbility, OpponentCantPlayAceSpecCardsIfToolAttachedPassiveAbility
-from abilities.passives.evolution import PokemonCanUseAttacksFromPastEvolutionsPassiveAbility
+from cards.abilities.passives.evolution import PokemonCanUseAttacksFromPastEvolutionsPassiveAbility
 from abilities.triggers.affliction import FlipExtraCoinIfAsleepTriggerAbility
 from abilities.triggers.board import TakeOneFewerPrizeCardOnKnockoutTriggerAbility, \
     DiscardFromHandOnKnockoutTriggerAbility, SearchDeckForCardTriggerAbility, SearchDeckForCardOnKnockoutTriggerAbility
@@ -11,20 +11,20 @@ from abilities.triggers.damage import HealDuringPokemonCheckupTriggerAbility, \
     PreventDamageIfSameEnergyAsOpponentTriggerAbility, DamageAttackingPokemonOnAttackedTriggerAbility
 from abilities.triggers.energy import MaySwitchOnEnergyAttachedTriggerAbility
 from abilities.triggers.health import PreventKnockOutTriggerAbility
-from src.abilities.actives.damage import *
-from src.abilities.actives.energy import *
-from src.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
+from cards.abilities.actives.damage import *
+from cards.abilities.actives.energy import *
+from cards.abilities.passives.ability import BasicPokemonInPlayHaveNoAbilities, \
     PokemonWIthRuleBoxHaveNoAbilitiesExceptFuture, OpponentsActivePokemonHaveNoAbilitiesPassiveAbility, \
     PokemonWithDamageHaveNoAbilitiesPassiveAbility, BenchedStageTwoPokemonHaveNoAbilitiesPassiveAbility
-from src.abilities.passives.board import LimitNumberOfOpponentBenchedPokemonPassiveAbility, \
+from cards.abilities.passives.board import LimitNumberOfOpponentBenchedPokemonPassiveAbility, \
     OpponentCantPlayItemCardsPassiveAbility, OpponentCantPlayItemCardsOrToolsPassiveAbility, \
     CantPlayPokemonWithAbilityExceptForPassiveAbility, OpponentCantPlayStadiumCardsPassiveAbility
-from src.abilities.passives.damage import *
-from src.abilities.passives.damage import IncreasePokemonAttackDamageForPokemonPassiveAbility
-from src.abilities.passives.energy import *
-from src.abilities.passives.evolution import PokemonCanEvolveImmediatelyPassiveAbility
-from src.abilities.passives.health import *
-from src.abilities.passives.affliction import *
+from cards.abilities.passives.damage import *
+from cards.abilities.passives.damage import IncreasePokemonAttackDamageForPokemonPassiveAbility
+from cards.abilities.passives.energy import *
+from cards.abilities.passives.evolution import PokemonCanEvolveImmediatelyPassiveAbility
+from cards.abilities.passives.health import *
+from cards.abilities.passives.affliction import *
 from src.abilities.triggers.affliction import AddDamageToPoisonedPokemonTriggerAbility, \
     PreventAllEffectsOnSupportCardPlayedTriggerAbility
 from src.abilities.triggers.damage import HealWhenAttachingEnergyTriggerAbility

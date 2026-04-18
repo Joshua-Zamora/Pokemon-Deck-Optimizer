@@ -1,0 +1,148 @@
+- As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon cost {C} more.
+- As long as this Pokémon is in play, it is {G} and {R} type.
+- As long as this Pokémon is in the Active Spot, attacks used by your opponent's Active Pokémon do 20 less damage (before applying Weakness and Resistance).
+- As long as this Pokémon is in the Active Spot, prevent all damage done to your Benched Pokémon by attacks from your opponent's Pokémon.
+- As long as this Pokémon is in the Active Spot, Basic Pokémon in play (both yours and your opponent's) have no Abilities, except for Mischievous Lock.
+- As long as this Pokémon is on your Bench, attacks used by your Marowak do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- As long as this Pokémon is in the Active Spot, your opponent can't have more than 3 Benched Pokémon. If they have 4 or more Benched Pokémon, they discard Benched Pokémon until they have 3 Pokémon on the Bench. If more than one effect changes the number of Benched Pokémon allowed, use the smaller number.
+- As long as this Pokémon is in the Active Spot, your opponent's Pokémon in play that have any damage counters on them have no Abilities, except for Pokémon ex.
+- As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon can't retreat.
+- As long as this Pokémon is in the Active Spot, your opponent can't play any Stadium cards from their hand.
+- As long as this Pokémon is on your Bench, prevent all damage from and effects of attacks from your opponent's Pokémon done to this Pokémon.
+- As long as this Pokémon is in the Active Spot, Pokémon with a Rule Box in play (both yours and your opponent's) have no Abilities, except for Future Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)
+- As long as this Pokémon is in the Active Spot, your opponent's Active Pokémon has no Abilities, except for Midnight Fluttering.
+- As long as this Pokémon is in the Active Spot, it can evolve during your first turn or the turn you play it.
+- As long as this Pokémon is in the Active Spot, whenever your opponent plays a Supporter card from their hand, prevent all effects of that card done to all of your Pokémon.
+- As long as this Pokémon is on your Bench, your Active Pokémon's Retreat Cost is {C}{C} less.
+- As long as this Pokémon is on your Bench, Benched Stage 2 Pokémon (both yours and your opponent's) have no Abilities.
+- As long as this Pokémon has a Future Booster Energy Capsule attached, it is {F} and {M} type.
+- As long as you have at least 1 other Bouffalant in play, all of your Basic {C} Pokémon take 60 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Curly Wall doesn't stack.
+- As long as this Pokémon is in the Active Spot, put 5 more damage counters on your opponent's Poisoned Pokémon during Pokémon Checkup.
+- As long as this Pokémon is in the Active Spot, attacks used by your opponent's Basic Pokémon cost {C} more.
+- As long as this Pokémon is in the Active Spot, your opponent can't play any Item cards or Pokémon Tool cards from their hand.
+- As long as this Pokémon is on your Bench, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.
+- As long as this Pokémon is on your Bench, all of your Steven's Pokémon take 30 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance). The effect of Stone Palace doesn't stack.
+- As long as this Pokémon is in the Active Spot, your opponent can't play any Istem cards from their hand.
+- As long as this Pokémon is in the Active Spot, whenever you attach an Energy card from your hand to 1 of your Pokémon, heal 90 damage from that Pokémon.
+- As long as this Pokémon is in the Active Spot, your opponent can't play any Pokémon that has an Ability from their hand, except for Team Rocket's Pokémon.
+- Your Pokémon in play have no Weakness.
+- Your Pokémon in play have no Retreat Cost.
+- Your Basic Pokémon in play have no Retreat Cost.
+- This Pokémon can evolve during your first turn or the turn you play it.
+- Each of your evolved Pokémon can use any attack from its previous Evolutions. (You still need the necessary Energy to use each attack.)
+- The Weakness of each of your opponent's {N} Pokémon in play is now {P}. (Apply Weakness as ×2.)
+- Apply Weakness for your opponent's Active Pokémon as ×4 instead.
+- Prevent all effects of attacks used by your opponent's Pokémon done to all of your Pokémon that have Energy attached. (Existing effects are not removed. Damage is not an effect.)
+- Prevent all effects of attacks used by your opponent's Pokémon done to this Pokémon. (Damage is not an effect.)
+- Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon ex and Pokémon V.
+- Prevent all damage done to this Pokémon by attacks from your opponent's {L} Pokémon.
+- Prevent all effects of your opponent's Pokémon's Abilities done to this Pokémon.
+- Prevent all damage from and effects of attacks from your opponent's Pokémon done to your Benched Pokémon.
+- Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon ex.
+- Prevent all damage from and effects of attacks from your opponent's Tera Pokémon done to this Pokémon.
+- Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon if that damage is 200 or more.
+- Prevent all damage from attacks done to this Pokémon by your opponent's Pokémon that have an Ability.
+- Prevent all damage done to this Pokémon by attacks from your opponent's Basic Pokémon ex.
+- Prevent all damage done to your Benched Pokémon that don't have a Rule Box by attacks from your opponent's Pokémon. (Pokémon ex, Pokémon V, etc. have Rule Boxes.)
+- Prevent all damage from and effects of attacks done to this Pokémon by your opponent's Pokémon that have any Special Energy attached.
+- Prevent all effects of attacks used by your opponent's Pokémon done to your Basic Team Rocket's Pokémon. (Existing effects are not removed. Damage is not an effect.)
+- Prevent all damage counters from being placed on your Benched Pokémon by effects of attacks used by your opponent's Basic Pokémon.
+- All of your Pokémon take 10 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).
+- Your opponent's Active Pokémon's Retreat Cost is {C} more.
+- Your opponent's Active Evolution Pokémon's Retreat Cost is {C} more.
+- This Pokémon takes 30 less damage from attacks (after applying Weakness and Resistance).
+- This Pokémon takes 20 less damage from attacks (after applying Weakness and Resistance).
+- Your Basic Pokémon's attacks do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Damage from attacks used by this Pokémon isn't affected by any effects on your opponent's Active Pokémon.
+- Attacks used by your Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Attacks used by your Cynthia's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Attacks used by your Hop's Pokémon do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance). The effect of Extra Helpings doesn't stack.
+- Attacks used by your Future Pokémon, except any Iron Crown ex, do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Blood Moon used by this Pokémon costs {C} less for each Prize card your opponent has taken.
+- Pokémon (both yours and your opponent's) can't be healed.
+- Basic Pokémon V in play (both yours and your opponent's) have no Abilities.
+- This Pokémon can't be Burned. Prevent all damage done to this Pokémon by attacks from your opponent's {R} Pokémon.
+- This Pokémon can't be Paralyzed.
+- This Pokémon can't be affected by any Special Conditions.
+- This Pokémon can't be Asleep.
+- Cards in your opponent's discard pile can't be put into their hand by an effect of your opponent's Abilities or Trainer cards.
+- Trainer cards in your opponent's discard pile can't be put into their deck by an effect of your opponent's Item or Supporter cards.
+- Your opponent's Pokémon in play and all attached cards can't be put into your opponent's hand.
+- Your opponent's Poisoned Pokémon don't recover from that Special Condition when they evolve or devolve.
+- All of your Pokémon that have {P} Energy attached have no Retreat Cost.
+- All of your Pokémon that have {M} Energy attached have no Retreat Cost.
+- All of your Pokémon that have any {M} Energy attached take 20 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).
+- Your opponent's Pokémon that have 40 HP or less remaining can't attack.
+- This Pokémon can't attack unless you have 4 or more Team Rocket's Pokémon in play.
+- When this Pokémon is Knocked Out, flip a coin. If heads, your opponent can't take any Prize cards for it.
+- When your opponent's Active Pokémon is Knocked Out, flip a coin. If heads, take 1 more Prize card. The effect of Wonder Kiss doesn't stack.
+- If this Pokémon would be Knocked Out by damage from an attack, flip a coin. If heads, this Pokémon is not Knocked Out, and its remaining HP becomes 10.
+- If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, search your deck for a card and put it into your hand. Then, shuffle your deck.
+- If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, discard 2 random cards from your opponent's hand.
+- If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon, and if you have any Pecharunt ex in play, your opponent takes 1 fewer Prize card.
+- If your opponent's Basic Pokémon is Knocked Out by damage from an attack used by this Pokémon, take 1 more Prize card.
+- If this Pokémon is Confused and is damaged by an attack, flip a coin. If heads, prevent that damage.
+- If this Pokémon is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 2 damage counters on the Attacking Pokémon for each {M} Energy attached to this Pokémon.
+- During Pokémon Checkup, if this Pokémon is in the Active Spot, put 1 damage counter on your opponent's Active Pokémon.
+- During Pokémon Checkup, put 1 damage counter on each Pokémon that has an Ability (both yours and your opponent's), except any Froslass.
+- During Pokémon Checkup, put 3 more damage counters on your opponent's Burned Pokémon.
+- During Pokémon Checkup, if this Pokémon is in the Active Spot, put 2 damage counters on each of your opponent's Basic Pokémon.
+- If this Pokémon is in the Active Spot and is Knocked Out, flip a coin. If heads, your opponent takes 1 fewer Prize card.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 3 damage counters on the Attacking Pokémon.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), the Attacking Pokémon is now Burned.
+- If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, move up to 2 {W} Energy cards from this Pokémon to 1 of your Benched Pokémon.
+- If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, flip a coin. If heads, the Attacking Pokémon is Knocked Out.
+- If this Pokémon is in the Active Spot, has a Pokémon Tool attached, and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 5 damage counters on the Attacking Pokémon.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), discard an Energy from the Attacking Pokémon.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), put 3 damage counters on the Attacking Pokémon for each of your Tandemaus, Maushold, and Maushold ex in play.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), the Attacking Pokémon is now Poisoned.
+- If this Pokémon is in the Active Spot and is Knocked Out by damage from an attack from your opponent's Pokémon, put 6 damage counters on the Attacking Pokémon.
+- If this Pokémon is in the Active Spot and is damaged by an attack from your opponent's Pokémon (even if this Pokémon is Knocked Out), search your deck for up to 2 Pokémon that have "Koffing" in their name and put them onto your Bench. Then, shuffle your deck.
+- If this Pokémon has any {D} Energy attached and is damaged by an attack, flip a coin. If heads, prevent that damage.
+- If your opponent has any cards in their discard pile that have "Colress" in the name, this Pokémon can use the Trifrost attack for {C}.
+- If this Pokémon has any {D} Energy attached, it gets +100 HP, and the attacks it uses do 100 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- If this Pokémon has any Energy attached, it takes 30 less damage from attacks (after applying Weakness and Resistance).
+- If this Pokémon has 3 or more {M} Energy attached, it gets +100 HP.
+- If this Pokémon has 2 or more damage counters on it, attacks used by this Pokémon do 120 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- If you have Plusle in play, whenever your opponent attaches an Energy card from their hand to 1 of their Pokémon, put 2 damage counters on that Pokémon. The effect of Buddy Pulse doesn't stack.
+- This Pokémon may have up to 4 Pokémon Tools attached to it. If it loses this Ability, discard Pokémon Tools from it until only 1 remains.
+- During Pokémon Checkup, heal 20 damage from each of your Pokémon.
+- When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you must discard the top 5 cards of your deck.
+- Put this Pokémon into play only with the effect of Palafin's Zero to Hero Ability.
+- Whenever your opponent plays an Item or Supporter card from their hand, prevent all effects of that card done to this Pokémon.
+- Whenever your opponent attaches an Energy card from their hand to 1 of their Pokémon, put 2 damage counters on that Pokémon.
+- Whenever your opponent plays a Pokémon from their hand to evolve 1 of their Pokémon, put 4 damage counters on that Pokémon. The effect of Darkest Impulse doesn't stack.
+- Whenever your opponent's Active Pokémon moves to the Bench during their turn, their new Active Pokémon is now Burned.
+- This Pokémon gets +50 HP for each Prize card your opponent has taken.
+- This Pokémon gets +40 HP for each {F} Energy attached to it.
+- Once at the end of your turn (after your attack), if this Pokémon is in the Active Spot, you must discard the top 5 cards of your deck.
+- If any damage is done to this Pokémon by attacks, flip a coin. If heads, prevent that damage.
+- All of your Pokémon in play get +40 HP. The effect of Vibrant Dance doesn't stack.
+- If this Pokémon is Asleep, flip 2 coins instead of 1 during Pokémon Checkup. If either of them is tails, this Pokémon is still Asleep.
+- If this Pokémon and your opponent's Active Pokémon have the same amount of Energy attached, prevent all damage done to this Pokémon by attacks from your opponent's Pokémon.
+- If this Pokémon has full HP, it takes 80 less damage from attacks from your opponent's Pokémon (after applying Weakness and Resistance).
+- If this Pokémon has full HP and would be Knocked Out by damage from an attack, it is not Knocked Out, and its remaining HP becomes 10.
+- If this Pokémon has any Special Energy attached, it gets +100 HP.
+- If this Pokémon has any {L} Energy attached, it has no Retreat Cost.
+- If this Pokémon has any {P} Energy attached, it has no Retreat Cost.
+- If this Pokémon has any {W} Energy attached, it has no Retreat Cost.
+- If this Pokémon has any {R} Energy attached, it has no Retreat Cost.
+- If this Pokémon has a Pokémon Tool attached, your opponent can't play any ACE SPEC cards from their hand.
+- If this Pokémon has no Energy attached, it has no Retreat Cost.
+- If your opponent has no Pokémon ex or Pokémon V in play, this Pokémon can't attack.
+- If you have Nidoqueen in play, ignore all Energy in the costs of attacks used by this Pokémon.
+- If you have Solrock in play, prevent all effects of any Stadium done to your Pokémon in play.
+- If you have any Tera Pokémon in play, this Pokémon can use the Double-Edge attack for {P}.
+- If you have Karrablast in play, this Pokémon can evolve during your first turn or the turn you play it.
+- If you have Shelmet in play, this Pokémon can evolve during your first turn or the turn you play it.
+- If you have the same number of cards in your hand as your opponent, ignore all Energy in the cost of Frightening Howl used by this Pokémon.
+- If you have Simisage, Simisear, and Simipour in play, ignore all {C} Energy in the costs of attacks used by this Pokémon.
+- If you go second, this Pokémon can evolve during your first turn.
+- If you go first, this Pokémon can use attacks during your first turn.
+- This Pokémon can evolve into any Pokémon ex that evolves from Eevee if you play it from your hand onto this Pokémon. (This Pokémon can't evolve during your first turn or the turn you play it.)
+- Attacks used by this Pokémon do 50 more damage to your opponent's Active Pokémon that has an Ability (before applying Weakness and Resistance).
+- Attacks used by your {G} Pokémon and {R} Pokémon do 20 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Attacks used by your Evolution {R} Pokémon do 10 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).
+- Attacks used by this Pokémon cost {C} less for each of your opponent's Benched Pokémon.
+- Attacks used by your Pokémon do 30 more damage to your opponent's Active Evolution Pokémon (before applying Weakness and Resistance).
+- Attacks used by this Pokémon cost {C} less for each Kofu card in your discard pile.

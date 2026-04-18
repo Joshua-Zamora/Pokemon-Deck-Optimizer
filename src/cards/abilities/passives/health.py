@@ -1,4 +1,4 @@
-from src.abilities.base import PassiveAbility
+from cards.abilities.base import PassiveAbility
 from src.cards.pokemon_card import PokemonCard
 from src.core.player import Player
 

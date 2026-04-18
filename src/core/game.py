@@ -11,6 +11,7 @@ class Game:
     all_abilities: dict = {}
     all_attacks: dict = {}
     stadium_in_play: TrainerCard = None
+    first_player_to_move: Player = None
 
     def __init__(self, player_one: Player, player_two: Player):
         self.player_one = player_one
@@ -22,9 +23,11 @@ class Game:
         coin_toss = random.choice([self.player_one, self.player_two])
 
         if coin_toss == self.player_one:
-            return self.player_one if self.player_one.will_move_first() else self.player_two
+            self.first_player_to_move = self.player_one if self.player_one.will_move_first() else self.player_two
+            return self.first_player_to_move
         else:
-            return self.player_two if self.player_two.will_move_first() else self.player_one
+            self.first_player_to_move = self.player_two if self.player_two.will_move_first() else self.player_one
+            return self.first_player_to_move
 
     def set_up_board(self):
         """Initializes the board for play."""
